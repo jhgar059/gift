@@ -1,424 +1,471 @@
-// Love Website JavaScript
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // Apply configuration
-    function applyConfig() {
-        if (window.CONFIG) {
-            // Update subtitle
-            const subtitle = document.getElementById('subtitle');
-            if (subtitle) {
-                subtitle.textContent = `${CONFIG.partnerName}, ${CONFIG.messages.subtitle}`;
-            }
-            
-            // Update partner name and description
-            const partnerName = document.getElementById('partnerName');
-            if (partnerName) {
-                partnerName.textContent = `${CONFIG.partnerName} 💕`;
-            }
-            
-            const partnerDescription = document.getElementById('partnerDescription');
-            if (partnerDescription) {
-                partnerDescription.textContent = CONFIG.characters.partner;
-            }
-            
-            // Update your name and description
-            const yourName = document.getElementById('yourName');
-            if (yourName) {
-                yourName.textContent = `${CONFIG.yourName} 💙`;
-            }
-            
-            const yourDescription = document.getElementById('yourDescription');
-            if (yourDescription) {
-                yourDescription.textContent = CONFIG.characters.you;
-            }
-            
-            // Update love note
-            const loveNoteText = document.getElementById('loveNoteText');
-            if (loveNoteText) {
-                loveNoteText.textContent = `${CONFIG.partnerName}, ${CONFIG.messages.loveNote}`;
-            }
-            
-            // Update memory descriptions
-            const memoryLateNight = document.getElementById('memoryLateNight');
-            if (memoryLateNight) {
-                memoryLateNight.textContent = CONFIG.memories.lateNight;
-            }
-            
-            const memoryFirstMeeting = document.getElementById('memoryFirstMeeting');
-            if (memoryFirstMeeting) {
-                memoryFirstMeeting.textContent = CONFIG.memories.firstMeeting;
-            }
-            
-            const memoryCare = document.getElementById('memoryCare');
-            if (memoryCare) {
-                memoryCare.textContent = CONFIG.memories.care;
-            }
-            
-            // Update special message
-            const specialMessageTitle = document.getElementById('specialMessageTitle');
-            if (specialMessageTitle) {
-                specialMessageTitle.textContent = `To My Dearest ${CONFIG.partnerName}`;
-            }
-            
-            const specialMessage1 = document.getElementById('specialMessage1');
-            if (specialMessage1) {
-                specialMessage1.textContent = CONFIG.messages.specialMessage;
-            }
-            
-            const specialMessage2 = document.getElementById('specialMessage2');
-            if (specialMessage2) {
-                specialMessage2.textContent = CONFIG.messages.specialMessage2;
-            }
-            
-            const signature = document.getElementById('signature');
-            if (signature) {
-                signature.textContent = CONFIG.messages.signature;
-            }
-        }
-    }
-    
-    // Apply config on load
-    applyConfig();
-    
-    // Create floating hearts
-    function createHearts() {
-        const heartsContainer = document.querySelector('.hearts-container');
-        const heartSymbols = ['💕', '💖', '💗', '💘', '💝', '💞', '💟', '💌', '💋', '❤️'];
-        
-        for (let i = 0; i < 15; i++) {
-            const heart = document.createElement('div');
-            heart.className = 'heart';
-            heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
-            heart.style.left = Math.random() * 100 + '%';
-            heart.style.top = Math.random() * 100 + '%';
-            heart.style.animationDelay = Math.random() * 6 + 's';
-            heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
-            heartsContainer.appendChild(heart);
-        }
-    }
+// === SCRIPT PRINCIPAL EN ESPAÑOL ===
 
-    // Music Control
-    const musicToggle = document.getElementById('musicToggle');
-    const bgMusic = document.getElementById('bgMusic');
-    let isPlaying = false;
+// Variables globales
+let kissCount = 0;
+let musicPlaying = false;
+let audioElement = null;
 
-    musicToggle.addEventListener('click', function() {
-        if (isPlaying) {
-            bgMusic.pause();
-            musicToggle.textContent = '🎵';
-            isPlaying = false;
-        } else {
-            bgMusic.play().then(() => {
-                musicToggle.textContent = '🔊';
-                isPlaying = true;
-            }).catch(() => {
-                musicToggle.textContent = '❌';
-                console.log('Music could not be played');
-            });
-        }
+// Inicializar cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', () => {
+    initializePage();
+    setupEventListeners();
+    startFloatingHearts();
+    loadKissCount();
+});
+
+// Inicializar página con configuración
+function initializePage() {
+    // Actualizar nombre de la pareja en todo el sitio
+    const partnerNameElements = document.querySelectorAll('.partner-name');
+    partnerNameElements.forEach(el => {
+        el.textContent = CONFIG.partnerName;
     });
 
-    // Love Note Toggle
-    const loveButton = document.getElementById('loveButton');
-    const loveNote = document.getElementById('loveNote');
+    // Actualizar subtítulo
+    const subtitleEl = document.querySelector('.subtitle');
+    if (subtitleEl) {
+        subtitleEl.textContent = CONFIG.messages.subtitle;
+    }
 
-    loveButton.addEventListener('click', function() {
-        loveNote.classList.toggle('visible');
-        if (loveNote.classList.contains('visible')) {
-            loveButton.textContent = 'Hide My Love Note 💝';
-            createHeartBurst();
-        } else {
-            loveButton.textContent = 'Click for a surprise 💝';
+    // Actualizar mensaje de nota de amor
+    const loveNoteEl = document.querySelector('.love-note-text');
+    if (loveNoteEl) {
+        loveNoteEl.textContent = CONFIG.messages.loveNote;
+    }
+
+    // Actualizar títulos de secciones
+    updateSectionTitles();
+
+    // Cargar recuerdos
+    loadMemories();
+
+    // Configurar medidor de amor
+    setupLoveMeter();
+
+    // Configurar personajes
+    setupCharacters();
+
+    // Inicializar música si está habilitada
+    if (CONFIG.music.enabled) {
+        initializeMusic();
+    }
+}
+
+// Actualizar títulos de secciones
+function updateSectionTitles() {
+    const sections = CONFIG.messages.sections;
+
+    document.querySelectorAll('[data-section]').forEach(el => {
+        const sectionKey = el.dataset.section;
+        if (sections[sectionKey]) {
+            el.textContent = sections[sectionKey];
         }
     });
+}
 
-    // Create heart burst effect
-    function createHeartBurst() {
-        const heartsContainer = document.querySelector('.hearts-container');
-        const burstHearts = ['💕', '💖', '💗', '💘', '💝', '💞'];
-        
-        for (let i = 0; i < 10; i++) {
-            const heart = document.createElement('div');
-            heart.className = 'heart';
-            heart.textContent = burstHearts[Math.floor(Math.random() * burstHearts.length)];
-            heart.style.left = (Math.random() * 80 + 10) + '%';
-            heart.style.top = (Math.random() * 80 + 10) + '%';
-            heart.style.animation = 'float 2s ease-out forwards';
-            heart.style.fontSize = '25px';
-            heart.style.zIndex = '1000';
-            heartsContainer.appendChild(heart);
-            
-            setTimeout(() => {
-                heart.remove();
-            }, 2000);
-        }
-    }
+// Cargar recuerdos en la galería
+function loadMemories() {
+    const memoriesGrid = document.querySelector('.memories-grid');
+    if (!memoriesGrid) return;
 
-    // Kiss Counter
-    let kissCount = 0;
-    const kissButton = document.getElementById('kissButton');
-    const kissCountDisplay = document.getElementById('kissCount');
+    memoriesGrid.innerHTML = '';
 
-    kissButton.addEventListener('click', function() {
-        kissCount++;
-        kissCountDisplay.textContent = kissCount;
-        createKissEffect();
-        
-        // Add special messages for certain kiss counts
-        if (window.CONFIG && window.CONFIG.kissMessages) {
-            if (kissCount === 10 && window.CONFIG.kissMessages[10]) {
-                showSpecialMessage(window.CONFIG.kissMessages[10]);
-            } else if (kissCount === 50 && window.CONFIG.kissMessages[50]) {
-                showSpecialMessage(window.CONFIG.kissMessages[50]);
-            } else if (kissCount === 100 && window.CONFIG.kissMessages[100]) {
-                showSpecialMessage(window.CONFIG.kissMessages[100]);
-            }
-        }
+    CONFIG.memories.forEach((memory, index) => {
+        const memoryCard = document.createElement('div');
+        memoryCard.className = 'memory-card';
+        memoryCard.innerHTML = `
+            <span class="memory-icon">${memory.icon}</span>
+            <h3>${memory.title}</h3>
+            <p>${memory.description}</p>
+        `;
+
+        memoryCard.addEventListener('click', () => {
+            showMemoryMessage(memory.specialMessage);
+            createSparkles(memoryCard);
+        });
+
+        memoriesGrid.appendChild(memoryCard);
     });
+}
 
-    // Create kiss effect
-    function createKissEffect() {
-        const kissEffects = document.querySelector('.kiss-effects');
-        const kissSymbols = ['💋', '💕', '💖', '💗', '😘'];
-        
-        for (let i = 0; i < 5; i++) {
-            const kiss = document.createElement('div');
-            kiss.textContent = kissSymbols[Math.floor(Math.random() * kissSymbols.length)];
-            kiss.style.position = 'absolute';
-            kiss.style.left = Math.random() * 100 + '%';
-            kiss.style.top = Math.random() * 100 + '%';
-            kiss.style.fontSize = '30px';
-            kiss.style.animation = 'float 2s ease-out forwards';
-            kiss.style.pointerEvents = 'none';
-            kiss.style.zIndex = '1000';
-            kissEffects.appendChild(kiss);
-            
-            setTimeout(() => {
-                kiss.remove();
-            }, 2000);
-        }
+// Configurar medidor de amor
+function setupLoveMeter() {
+    const meterFill = document.querySelector('.meter-fill');
+    if (meterFill) {
+        meterFill.style.width = '100%';
+        meterFill.innerHTML = `<span>${CONFIG.loveMeterPercentage}% - ${CONFIG.loveMeterText}</span>`;
     }
+}
 
-    // Show special message
-    function showSpecialMessage(message) {
-        const messageDiv = document.createElement('div');
-        messageDiv.textContent = message;
-        messageDiv.style.position = 'fixed';
-        messageDiv.style.top = '50%';
-        messageDiv.style.left = '50%';
-        messageDiv.style.transform = 'translate(-50%, -50%)';
-        messageDiv.style.background = 'linear-gradient(135deg, #FF69B4, #FF1493)';
-        messageDiv.style.color = 'white';
-        messageDiv.style.padding = '1rem 2rem';
-        messageDiv.style.borderRadius = '2rem';
-        messageDiv.style.fontFamily = 'Great Vibes, cursive';
-        messageDiv.style.fontSize = '1.5rem';
-        messageDiv.style.fontWeight = '600';
-        messageDiv.style.boxShadow = '0 10px 30px rgba(255, 105, 180, 0.4)';
-        messageDiv.style.zIndex = '10000';
-        messageDiv.style.animation = 'glow 2s ease-in-out infinite alternate';
-        document.body.appendChild(messageDiv);
-        
-        setTimeout(() => {
-            messageDiv.remove();
-        }, 3000);
-    }
+// Configurar personajes
+function setupCharacters() {
+    const characters = document.querySelectorAll('.character');
 
-    // Memory Gallery Interactions
-    const memoryCards = document.querySelectorAll('.memory-card');
-    
-    memoryCards.forEach(card => {
-        card.addEventListener('click', function() {
-            const memoryType = this.dataset.memory;
-            createMemoryEffect(memoryType);
-            this.style.transform = 'scale(1.05)';
-            setTimeout(() => {
-                this.style.transform = 'scale(1)';
-            }, 200);
+    characters.forEach((char, index) => {
+        const isPartner = index === 0;
+        const charData = isPartner ? CONFIG.characters.partner : CONFIG.characters.you;
+
+        const nameEl = char.querySelector('.character-name');
+        const descEl = char.querySelector('.character-description');
+
+        if (nameEl) nameEl.textContent = charData.name;
+        if (descEl) descEl.textContent = charData.description;
+
+        char.addEventListener('click', () => {
+            showMessage(charData.clickMessage);
+            createHeartBurst(char);
         });
     });
+}
 
-    // Create memory effects
-    function createMemoryEffect(type) {
-        if (window.CONFIG && window.CONFIG.memoryMessages) {
-            switch(type) {
-                case 'late-night':
-                    createStars();
-                    showMemoryMessage(window.CONFIG.memoryMessages.lateNight || "Those late nights talking with you are my favorite memories 🌙✨");
-                    break;
-                case 'first-meeting':
-                    createSparkles();
-                    showMemoryMessage(window.CONFIG.memoryMessages.firstMeeting || "I know the day we meet will be magical and unforgettable 💫💕");
-                    break;
-                case 'care':
-                    createHeartRain();
-                    showMemoryMessage(window.CONFIG.memoryMessages.care || "Your caring nature, sweet voice, and adorable cuteness melt my heart 💕😍");
-                    break;
+// Configurar event listeners
+function setupEventListeners() {
+    // Botón de nota de amor
+    const loveButton = document.querySelector('#love-button');
+    if (loveButton) {
+        loveButton.addEventListener('click', toggleLoveNote);
+    }
+
+    // Botón de enviar beso
+    const kissButton = document.querySelector('#kiss-button');
+    if (kissButton) {
+        kissButton.addEventListener('click', sendKiss);
+    }
+
+    // Botón de música
+    const musicButton = document.querySelector('#music-control');
+    if (musicButton) {
+        musicButton.addEventListener('click', toggleMusic);
+    }
+
+    // Evento de clic en el documento para corazones
+    if (CONFIG.effects.floatingHearts) {
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('button') && !e.target.closest('a')) {
+                createFloatingHeart(e.pageX, e.pageY);
             }
+        });
+    }
+}
+
+// Toggle nota de amor
+function toggleLoveNote() {
+    const loveNote = document.querySelector('.love-note');
+    if (loveNote) {
+        loveNote.classList.toggle('show');
+
+        if (loveNote.classList.contains('show')) {
+            createHeartBurst(loveNote);
         }
     }
+}
 
-    // Create starry night effect
-    function createStars() {
-        const heartsContainer = document.querySelector('.hearts-container');
-        
-        for (let i = 0; i < 20; i++) {
-            const star = document.createElement('div');
-            star.textContent = '✨';
-            star.style.position = 'absolute';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
-            star.style.fontSize = '20px';
-            star.style.animation = 'float 3s ease-in-out infinite';
-            star.style.animationDelay = Math.random() * 3 + 's';
-            star.style.pointerEvents = 'none';
-            heartsContainer.appendChild(star);
-            
-            setTimeout(() => {
-                star.remove();
-            }, 5000);
-        }
+// Enviar beso
+function sendKiss() {
+    kissCount++;
+    saveKissCount();
+    updateKissDisplay();
+
+    // Crear animación de beso
+    createKissAnimation();
+
+    // Mostrar mensaje especial en hitos
+    checkKissMilestone();
+}
+
+// Actualizar display del contador de besos
+function updateKissDisplay() {
+    const kissCountEl = document.querySelector('.kiss-count');
+    if (kissCountEl) {
+        kissCountEl.textContent = kissCount;
+
+        // Animación de actualización
+        kissCountEl.style.transform = 'scale(1.2)';
+        setTimeout(() => {
+            kissCountEl.style.transform = 'scale(1)';
+        }, 200);
+    }
+}
+
+// Verificar hitos del contador de besos
+function checkKissMilestone() {
+    const messages = CONFIG.messages.kissMessages;
+    let message = '';
+
+    if (kissCount === 10) {
+        message = messages.milestone10;
+    } else if (kissCount === 50) {
+        message = messages.milestone50;
+    } else if (kissCount === 100) {
+        message = messages.milestone100;
+    } else if (kissCount === 500) {
+        message = messages.milestone500;
     }
 
-    // Create sparkle effect
-    function createSparkles() {
-        const heartsContainer = document.querySelector('.hearts-container');
-        const sparkles = ['✨', '⭐', '💫', '🌟'];
-        
-        for (let i = 0; i < 15; i++) {
+    if (message) {
+        showMessage(message);
+        createCelebration();
+    }
+}
+
+// Crear animación de beso
+function createKissAnimation() {
+    const kissButton = document.querySelector('#kiss-button');
+    if (!kissButton) return;
+
+    const kiss = document.createElement('div');
+    kiss.textContent = '💋';
+    kiss.style.position = 'fixed';
+    kiss.style.left = kissButton.getBoundingClientRect().left + 'px';
+    kiss.style.top = kissButton.getBoundingClientRect().top + 'px';
+    kiss.style.fontSize = '3rem';
+    kiss.style.pointerEvents = 'none';
+    kiss.style.zIndex = '9999';
+    kiss.style.animation = 'floatHeart 2s ease-out forwards';
+
+    document.body.appendChild(kiss);
+
+    setTimeout(() => {
+        kiss.remove();
+    }, 2000);
+}
+
+// Guardar contador de besos
+function saveKissCount() {
+    localStorage.setItem('kissCount', kissCount.toString());
+}
+
+// Cargar contador de besos
+function loadKissCount() {
+    const saved = localStorage.getItem('kissCount');
+    if (saved) {
+        kissCount = parseInt(saved, 10);
+        updateKissDisplay();
+    }
+}
+
+// Crear corazón flotante
+function createFloatingHeart(x, y) {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.textContent = '💜';
+    heart.style.left = x + 'px';
+    heart.style.top = y + 'px';
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, CONFIG.animations.heartSpeed);
+}
+
+// Iniciar corazones flotantes automáticos
+function startFloatingHearts() {
+    if (!CONFIG.effects.floatingHearts) return;
+
+    setInterval(() => {
+        const x = Math.random() * window.innerWidth;
+        const y = window.innerHeight;
+        createFloatingHeart(x, y);
+    }, CONFIG.animations.heartFrequency);
+}
+
+// Crear explosión de corazones
+function createHeartBurst(element) {
+    if (!CONFIG.effects.heartBurst) return;
+
+    const rect = element.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    for (let i = 0; i < 10; i++) {
+        setTimeout(() => {
+            const angle = (Math.PI * 2 * i) / 10;
+            const distance = 50;
+            const x = centerX + Math.cos(angle) * distance;
+            const y = centerY + Math.sin(angle) * distance;
+
+            createFloatingHeart(x, y);
+        }, i * 50);
+    }
+}
+
+// Crear destellos
+function createSparkles(element) {
+    if (!CONFIG.effects.sparkles) return;
+
+    const rect = element.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    for (let i = 0; i < CONFIG.animations.sparkleCount; i++) {
+        setTimeout(() => {
             const sparkle = document.createElement('div');
-            sparkle.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
-            sparkle.style.position = 'absolute';
-            sparkle.style.left = Math.random() * 100 + '%';
-            sparkle.style.top = Math.random() * 100 + '%';
-            sparkle.style.fontSize = '25px';
-            sparkle.style.animation = 'float 2s ease-out forwards';
+            sparkle.className = 'sparkle';
+            sparkle.textContent = '✨';
+            sparkle.style.position = 'fixed';
+            sparkle.style.left = centerX + (Math.random() - 0.5) * 100 + 'px';
+            sparkle.style.top = centerY + (Math.random() - 0.5) * 100 + 'px';
+            sparkle.style.fontSize = '2rem';
             sparkle.style.pointerEvents = 'none';
-            heartsContainer.appendChild(sparkle);
-            
+
+            document.body.appendChild(sparkle);
+
             setTimeout(() => {
                 sparkle.remove();
-            }, 2000);
-        }
+            }, 1000);
+        }, i * 100);
     }
+}
 
-    // Create heart rain effect
-    function createHeartRain() {
-        const heartsContainer = document.querySelector('.hearts-container');
-        const hearts = ['💕', '💖', '💗', '💘', '💝', '💞'];
-        
-        for (let i = 0; i < 25; i++) {
-            setTimeout(() => {
-                const heart = document.createElement('div');
-                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-                heart.style.position = 'absolute';
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.top = '-50px';
-                heart.style.fontSize = '20px';
-                heart.style.animation = 'rainDown 3s linear forwards';
-                heart.style.pointerEvents = 'none';
-                heartsContainer.appendChild(heart);
-                
-                setTimeout(() => {
-                    heart.remove();
-                }, 3000);
-            }, i * 100);
-        }
-    }
+// Crear celebración
+function createCelebration() {
+    for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            createFloatingHeart(x, y);
 
-    // Add rain animation
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes rainDown {
-            to {
-                transform: translateY(calc(100vh + 50px));
-                opacity: 0;
+            if (i % 2 === 0) {
+                const sparkle = document.createElement('div');
+                sparkle.textContent = '✨';
+                sparkle.style.position = 'fixed';
+                sparkle.style.left = x + 'px';
+                sparkle.style.top = y + 'px';
+                sparkle.style.fontSize = '2rem';
+                sparkle.style.animation = 'sparkleAnimation 1s ease-out forwards';
+                sparkle.style.pointerEvents = 'none';
+                document.body.appendChild(sparkle);
+
+                setTimeout(() => sparkle.remove(), 1000);
             }
-        }
+        }, i * 100);
+    }
+}
+
+// Mostrar mensaje temporal
+function showMessage(message) {
+    const messageEl = document.createElement('div');
+    messageEl.className = 'floating-message';
+    messageEl.textContent = message;
+    messageEl.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.95), rgba(109, 40, 217, 0.95));
+        color: white;
+        padding: 30px 50px;
+        border-radius: 20px;
+        font-size: 1.5rem;
+        z-index: 10000;
+        box-shadow: 0 0 40px rgba(139, 92, 246, 0.6);
+        border: 2px solid rgba(192, 132, 252, 0.8);
+        animation: fadeIn 0.3s ease-out;
+        text-align: center;
+        max-width: 80%;
     `;
-    document.head.appendChild(style);
 
-    // Show memory message
-    function showMemoryMessage(message) {
-        const messageDiv = document.createElement('div');
-        messageDiv.textContent = message;
-        messageDiv.style.position = 'fixed';
-        messageDiv.style.top = '20%';
-        messageDiv.style.left = '50%';
-        messageDiv.style.transform = 'translate(-50%, -50%)';
-        messageDiv.style.background = 'rgba(255, 255, 255, 0.95)';
-        messageDiv.style.color = '#FF1493';
-        messageDiv.style.padding = '1.5rem 2rem';
-        messageDiv.style.borderRadius = '1rem';
-        messageDiv.style.fontFamily = 'Cormorant Garamond, serif';
-        messageDiv.style.fontSize = '1.3rem';
-        messageDiv.style.fontWeight = '600';
-        messageDiv.style.boxShadow = '0 10px 30px rgba(255, 105, 180, 0.3)';
-        messageDiv.style.zIndex = '10000';
-        messageDiv.style.textAlign = 'center';
-        messageDiv.style.maxWidth = '90%';
-        messageDiv.style.backdropFilter = 'blur(10px)';
-        document.body.appendChild(messageDiv);
-        
-        setTimeout(() => {
-            messageDiv.style.opacity = '0';
-            messageDiv.style.transform = 'translate(-50%, -50%) scale(0.8)';
-            setTimeout(() => {
-                messageDiv.remove();
-            }, 500);
-        }, 3000);
-    }
+    document.body.appendChild(messageEl);
 
-    // Character interactions
-    const partnerCharacter = document.getElementById('partner');
-    const youCharacter = document.getElementById('you');
-
-    if (partnerCharacter) {
-        partnerCharacter.addEventListener('click', function() {
-            const message = window.CONFIG && window.CONFIG.characterMessages && window.CONFIG.characterMessages.partner 
-                ? `${window.CONFIG.partnerName}, ${window.CONFIG.characterMessages.partner}`
-                : "You're the most beautiful person in the world! 💕";
-            showSpecialMessage(message);
-            createHeartBurst();
-        });
-    }
-
-    if (youCharacter) {
-        youCharacter.addEventListener('click', function() {
-            const message = window.CONFIG && window.CONFIG.characterMessages && window.CONFIG.characterMessages.you 
-                ? window.CONFIG.characterMessages.you
-                : "I'm so lucky to have you in my life! 💖";
-            showSpecialMessage(message);
-            createSparkles();
-        });
-    }
-
-    // Initialize
-    createHearts();
-    
-    // Add some initial animations
     setTimeout(() => {
-        document.querySelector('.main-title').style.animation = 'glow 2s ease-in-out infinite alternate';
-    }, 1000);
+        messageEl.style.animation = 'fadeOut 0.3s ease-out';
+        setTimeout(() => messageEl.remove(), 300);
+    }, 3000);
+}
 
-    // Auto-create some floating hearts periodically
-    setInterval(() => {
-        if (Math.random() > 0.7) {
-            createHearts();
+// Mostrar mensaje de recuerdo
+function showMemoryMessage(message) {
+    showMessage(message);
+}
+
+// Inicializar música
+function initializeMusic() {
+    audioElement = document.querySelector('#background-music');
+
+    if (!audioElement) {
+        audioElement = document.createElement('audio');
+        audioElement.id = 'background-music';
+        audioElement.loop = true;
+
+        // Agregar fuentes de audio
+        CONFIG.music.sources.forEach(source => {
+            const sourceEl = document.createElement('source');
+            sourceEl.src = source;
+            audioElement.appendChild(sourceEl);
+        });
+
+        document.body.appendChild(audioElement);
+    }
+
+    if (CONFIG.music.autoplay) {
+        playMusic();
+    }
+}
+
+// Toggle música
+function toggleMusic() {
+    if (!audioElement) return;
+
+    if (musicPlaying) {
+        pauseMusic();
+    } else {
+        playMusic();
+    }
+}
+
+// Reproducir música
+function playMusic() {
+    if (!audioElement) return;
+
+    audioElement.play().catch(err => {
+        console.log('No se pudo reproducir la música automáticamente');
+    });
+
+    musicPlaying = true;
+    updateMusicButton();
+}
+
+// Pausar música
+function pauseMusic() {
+    if (!audioElement) return;
+
+    audioElement.pause();
+    musicPlaying = false;
+    updateMusicButton();
+}
+
+// Actualizar botón de música
+function updateMusicButton() {
+    const musicIcon = document.querySelector('.music-icon');
+    if (musicIcon) {
+        musicIcon.textContent = musicPlaying ? '🔊' : '🔇';
+    }
+}
+
+// Obtener frase romántica aleatoria
+function getRandomQuote() {
+    const quotes = CONFIG.romanticQuotes;
+    return quotes[Math.floor(Math.random() * quotes.length)];
+}
+
+// Mostrar frase romántica aleatoria
+function showRandomQuote() {
+    showMessage(getRandomQuote());
+}
+
+// Animación CSS adicional (para fadeOut)
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes fadeOut {
+        from {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
         }
-    }, 10000);
-
-    // Add smooth scrolling to sections
-    document.querySelectorAll('section').forEach(section => {
-        section.style.scrollMarginTop = '2rem';
-    });
-
-    // Add loading animation
-    window.addEventListener('load', function() {
-        document.body.style.opacity = '0';
-        document.body.style.transition = 'opacity 0.5s ease';
-        setTimeout(() => {
-            document.body.style.opacity = '1';
-        }, 100);
-    });
-});
+        to {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.8);
+        }
+    }
+`;
+document.head.appendChild(style);
