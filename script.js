@@ -1,4 +1,4 @@
-// === SCRIPT PRINCIPAL EN ESPAÑOL ===
+// === SCRIPT PRINCIPAL MEJORADO ===
 
 // Variables globales
 let kissCount = 0;
@@ -11,50 +11,43 @@ document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
     startFloatingHearts();
     loadKissCount();
+    setupImageUploaders();
+    animateLoveMeter();
 });
 
 // Inicializar página con configuración
 function initializePage() {
-    // Actualizar nombre de la pareja en todo el sitio
     const partnerNameElements = document.querySelectorAll('.partner-name');
     partnerNameElements.forEach(el => {
         el.textContent = CONFIG.partnerName;
     });
 
-    // Actualizar subtítulo
     const subtitleEl = document.querySelector('.subtitle');
     if (subtitleEl) {
         subtitleEl.textContent = CONFIG.messages.subtitle;
     }
 
-    // Actualizar mensaje de nota de amor
     const loveNoteEl = document.querySelector('.love-note-text');
     if (loveNoteEl) {
         loveNoteEl.textContent = CONFIG.messages.loveNote;
     }
 
-    // Actualizar títulos de secciones
     updateSectionTitles();
-
-    // Cargar recuerdos
     loadMemories();
-
-    // Configurar medidor de amor
     setupLoveMeter();
-
-    // Configurar personajes
     setupCharacters();
 
-    // Inicializar música si está habilitada
     if (CONFIG.music.enabled) {
         initializeMusic();
     }
+
+    // Cargar imágenes guardadas
+    loadSavedImages();
 }
 
 // Actualizar títulos de secciones
 function updateSectionTitles() {
     const sections = CONFIG.messages.sections;
-
     document.querySelectorAll('[data-section]').forEach(el => {
         const sectionKey = el.dataset.section;
         if (sections[sectionKey]) {
@@ -63,7 +56,7 @@ function updateSectionTitles() {
     });
 }
 
-// Cargar recuerdos en la galería
+// Cargar recuerdos con opción de subir imágenes
 function loadMemories() {
     const memoriesGrid = document.querySelector('.memories-grid');
     if (!memoriesGrid) return;
@@ -73,37 +66,98 @@ function loadMemories() {
     CONFIG.memories.forEach((memory, index) => {
         const memoryCard = document.createElement('div');
         memoryCard.className = 'memory-card';
+        memoryCard.dataset.memoryIndex = index;
+
+        const savedImage = localStorage.getItem(`memory-image-${index}`);
+
         memoryCard.innerHTML = `
-            <span class="memory-icon">${memory.icon}</span>
+            <div class="memory-image-container">
+                ${savedImage ? 
+                    `<img src="${savedImage}" alt="${memory.title}" class="memory-image">` :
+                    `<span class="memory-icon">${memory.icon}</span>`
+                }
+                <label class="upload-overlay" for="memory-upload-${index}">
+                    <span>📷 Cambiar imagen</span>
+                </label>
+                <input type="file" id="memory-upload-${index}" class="memory-upload" accept="image/*" data-index="${index}">
+            </div>
             <h3>${memory.title}</h3>
             <p>${memory.description}</p>
         `;
 
-        memoryCard.addEventListener('click', () => {
-            showMemoryMessage(memory.specialMessage);
-            createSparkles(memoryCard);
+        memoryCard.addEventListener('click', (e) => {
+            if (!e.target.closest('.upload-overlay') && !e.target.closest('.memory-upload')) {
+                showMemoryMessage(memory.specialMessage);
+                createSparkles(memoryCard);
+            }
         });
 
         memoriesGrid.appendChild(memoryCard);
     });
+
+    // Setup upload listeners para memories
+    document.querySelectorAll('.memory-upload').forEach(input => {
+        input.addEventListener('change', (e) => handleMemoryImageUpload(e));
+    });
 }
 
-// Configurar medidor de amor
-function setupLoveMeter() {
-    const meterFill = document.querySelector('.meter-fill');
-    if (meterFill) {
-        meterFill.style.width = '100%';
-        meterFill.innerHTML = `<span>${CONFIG.loveMeterPercentage}% - ${CONFIG.loveMeterText}</span>`;
+// Manejar subida de imágenes de recuerdos
+function handleMemoryImageUpload(event) {
+    const file = event.target.files[0];
+    const index = event.target.dataset.index;
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const imageData = e.target.result;
+            localStorage.setItem(`memory-image-${index}`, imageData);
+            loadMemories(); // Recargar para mostrar la nueva imagen
+            showMessage('¡Imagen guardada! 💜');
+        };
+        reader.readAsDataURL(file);
     }
 }
 
-// Configurar personajes
+// Configurar medidor de amor con animación
+function setupLoveMeter() {
+    const meterFill = document.querySelector('.meter-fill');
+    if (meterFill) {
+        meterFill.style.width = '0%';
+        meterFill.innerHTML = `<span>${CONFIG.loveMeter.percentage} - ${CONFIG.loveMeter.text}</span>`;
+    }
+}
+
+// Animar medidor de amor al cargar
+function animateLoveMeter() {
+    const meterFill = document.querySelector('.meter-fill');
+    if (!meterFill) return;
+
+    setTimeout(() => {
+        meterFill.style.transition = 'width 3s ease-out';
+        meterFill.style.width = '100%';
+
+        // Crear corazones durante la animación
+        const interval = setInterval(() => {
+            const x = Math.random() * window.innerWidth;
+            const y = window.innerHeight * 0.5;
+            createFloatingHeart(x, y);
+        }, 200);
+
+        setTimeout(() => {
+            clearInterval(interval);
+            showMessage('¡Nuestro amor es infinito! 💜✨');
+        }, 3000);
+    }, 500);
+}
+
+// Configurar personajes con opción de subir imágenes
 function setupCharacters() {
     const characters = document.querySelectorAll('.character');
 
     characters.forEach((char, index) => {
         const isPartner = index === 0;
         const charData = isPartner ? CONFIG.characters.partner : CONFIG.characters.you;
+        const charKey = isPartner ? 'partner' : 'you';
 
         const nameEl = char.querySelector('.character-name');
         const descEl = char.querySelector('.character-description');
@@ -111,37 +165,116 @@ function setupCharacters() {
         if (nameEl) nameEl.textContent = charData.name;
         if (descEl) descEl.textContent = charData.description;
 
-        char.addEventListener('click', () => {
-            showMessage(charData.clickMessage);
-            createHeartBurst(char);
+        // Agregar upload de imagen
+        const imgContainer = char.querySelector('img').parentElement;
+        const savedImage = localStorage.getItem(`character-image-${charKey}`);
+
+        if (savedImage) {
+            char.querySelector('img').src = savedImage;
+        }
+
+        const uploadLabel = document.createElement('label');
+        uploadLabel.className = 'character-upload-overlay';
+        uploadLabel.innerHTML = '<span>📷</span>';
+        uploadLabel.htmlFor = `char-upload-${charKey}`;
+
+        const uploadInput = document.createElement('input');
+        uploadInput.type = 'file';
+        uploadInput.id = `char-upload-${charKey}`;
+        uploadInput.className = 'character-upload-input';
+        uploadInput.accept = 'image/*';
+        uploadInput.dataset.charKey = charKey;
+        uploadInput.style.display = 'none';
+
+        imgContainer.style.position = 'relative';
+        imgContainer.appendChild(uploadLabel);
+        imgContainer.appendChild(uploadInput);
+
+        uploadInput.addEventListener('change', handleCharacterImageUpload);
+
+        char.addEventListener('click', (e) => {
+            if (!e.target.closest('.character-upload-overlay') && !e.target.closest('.character-upload-input')) {
+                showMessage(charData.clickMessage);
+                createHeartBurst(char);
+            }
         });
     });
 }
 
+// Manejar subida de imágenes de personajes
+function handleCharacterImageUpload(event) {
+    const file = event.target.files[0];
+    const charKey = event.target.dataset.charKey;
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const imageData = e.target.result;
+            localStorage.setItem(`character-image-${charKey}`, imageData);
+
+            // Actualizar la imagen inmediatamente
+            const character = event.target.closest('.character');
+            const img = character.querySelector('img');
+            img.src = imageData;
+
+            showMessage('¡Foto actualizada! 💜');
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+// Cargar imágenes guardadas
+function loadSavedImages() {
+    // Cargar imágenes de personajes
+    ['partner', 'you'].forEach(charKey => {
+        const savedImage = localStorage.getItem(`character-image-${charKey}`);
+        if (savedImage) {
+            const character = document.querySelector(`[data-char-key="${charKey}"]`)?.closest('.character');
+            if (character) {
+                const img = character.querySelector('img');
+                if (img) img.src = savedImage;
+            }
+        }
+    });
+}
+
+// Setup de uploaders
+function setupImageUploaders() {
+    // Ya configurado en loadMemories y setupCharacters
+}
+
 // Configurar event listeners
 function setupEventListeners() {
-    // Botón de nota de amor
     const loveButton = document.querySelector('#love-button');
     if (loveButton) {
         loveButton.addEventListener('click', toggleLoveNote);
     }
 
-    // Botón de enviar beso
     const kissButton = document.querySelector('#kiss-button');
     if (kissButton) {
         kissButton.addEventListener('click', sendKiss);
     }
 
-    // Botón de música
+    // NUEVO: Botón para resetear contador de besos
+    const resetKissButton = document.createElement('button');
+    resetKissButton.textContent = '🔄 Reiniciar Contador';
+    resetKissButton.className = 'btn reset-kiss-btn';
+    resetKissButton.style.marginLeft = '10px';
+    resetKissButton.addEventListener('click', resetKissCount);
+
+    const kissSection = document.querySelector('#kiss-section .kiss-counter');
+    if (kissSection) {
+        kissSection.appendChild(resetKissButton);
+    }
+
     const musicButton = document.querySelector('#music-control');
     if (musicButton) {
         musicButton.addEventListener('click', toggleMusic);
     }
 
-    // Evento de clic en el documento para corazones
     if (CONFIG.effects.floatingHearts) {
         document.addEventListener('click', (e) => {
-            if (!e.target.closest('button') && !e.target.closest('a')) {
+            if (!e.target.closest('button') && !e.target.closest('a') && !e.target.closest('label') && !e.target.closest('input')) {
                 createFloatingHeart(e.pageX, e.pageY);
             }
         });
@@ -153,7 +286,6 @@ function toggleLoveNote() {
     const loveNote = document.querySelector('.love-note');
     if (loveNote) {
         loveNote.classList.toggle('show');
-
         if (loveNote.classList.contains('show')) {
             createHeartBurst(loveNote);
         }
@@ -165,12 +297,19 @@ function sendKiss() {
     kissCount++;
     saveKissCount();
     updateKissDisplay();
-
-    // Crear animación de beso
     createKissAnimation();
-
-    // Mostrar mensaje especial en hitos
     checkKissMilestone();
+}
+
+// NUEVO: Reiniciar contador de besos
+function resetKissCount() {
+    if (confirm('¿Estás seguro/a de que quieres reiniciar el contador de besos? 💋')) {
+        kissCount = 0;
+        saveKissCount();
+        updateKissDisplay();
+        showMessage('¡Contador reiniciado! Empecemos de nuevo 💜');
+        createCelebration();
+    }
 }
 
 // Actualizar display del contador de besos
@@ -178,8 +317,6 @@ function updateKissDisplay() {
     const kissCountEl = document.querySelector('.kiss-count');
     if (kissCountEl) {
         kissCountEl.textContent = kissCount;
-
-        // Animación de actualización
         kissCountEl.style.transform = 'scale(1.2)';
         setTimeout(() => {
             kissCountEl.style.transform = 'scale(1)';
@@ -192,14 +329,24 @@ function checkKissMilestone() {
     const messages = CONFIG.messages.kissMessages;
     let message = '';
 
-    if (kissCount === 10) {
+    if (kissCount === 1) {
+        message = messages.milestone1;
+    } else if (kissCount === 10) {
         message = messages.milestone10;
+    } else if (kissCount === 25) {
+        message = messages.milestone25;
     } else if (kissCount === 50) {
         message = messages.milestone50;
+    } else if (kissCount === 75) {
+        message = messages.milestone75;
     } else if (kissCount === 100) {
         message = messages.milestone100;
+    } else if (kissCount === 200) {
+        message = messages.milestone200;
     } else if (kissCount === 500) {
         message = messages.milestone500;
+    } else if (kissCount === 1000) {
+        message = messages.milestone1000;
     }
 
     if (message) {
@@ -224,10 +371,7 @@ function createKissAnimation() {
     kiss.style.animation = 'floatHeart 2s ease-out forwards';
 
     document.body.appendChild(kiss);
-
-    setTimeout(() => {
-        kiss.remove();
-    }, 2000);
+    setTimeout(() => kiss.remove(), 2000);
 }
 
 // Guardar contador de besos
@@ -253,10 +397,7 @@ function createFloatingHeart(x, y) {
     heart.style.top = y + 'px';
 
     document.body.appendChild(heart);
-
-    setTimeout(() => {
-        heart.remove();
-    }, CONFIG.animations.heartSpeed);
+    setTimeout(() => heart.remove(), CONFIG.animations.heartSpeed);
 }
 
 // Iniciar corazones flotantes automáticos
@@ -284,7 +425,6 @@ function createHeartBurst(element) {
             const distance = 50;
             const x = centerX + Math.cos(angle) * distance;
             const y = centerY + Math.sin(angle) * distance;
-
             createFloatingHeart(x, y);
         }, i * 50);
     }
@@ -310,10 +450,7 @@ function createSparkles(element) {
             sparkle.style.pointerEvents = 'none';
 
             document.body.appendChild(sparkle);
-
-            setTimeout(() => {
-                sparkle.remove();
-            }, 1000);
+            setTimeout(() => sparkle.remove(), 1000);
         }, i * 100);
     }
 }
@@ -388,7 +525,6 @@ function initializeMusic() {
         audioElement.id = 'background-music';
         audioElement.loop = true;
 
-        // Agregar fuentes de audio
         CONFIG.music.sources.forEach(source => {
             const sourceEl = document.createElement('source');
             sourceEl.src = source;
@@ -443,18 +579,7 @@ function updateMusicButton() {
     }
 }
 
-// Obtener frase romántica aleatoria
-function getRandomQuote() {
-    const quotes = CONFIG.romanticQuotes;
-    return quotes[Math.floor(Math.random() * quotes.length)];
-}
-
-// Mostrar frase romántica aleatoria
-function showRandomQuote() {
-    showMessage(getRandomQuote());
-}
-
-// Animación CSS adicional (para fadeOut)
+// Animación CSS adicional
 const style = document.createElement('style');
 style.textContent = `
     @keyframes fadeOut {
@@ -466,6 +591,81 @@ style.textContent = `
             opacity: 0;
             transform: translate(-50%, -50%) scale(0.8);
         }
+    }
+
+    .memory-image-container {
+        position: relative;
+        margin-bottom: 15px;
+    }
+
+    .memory-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+        border: 2px solid rgba(139, 92, 246, 0.3);
+    }
+
+    .upload-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(139, 92, 246, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        cursor: pointer;
+        border-radius: 10px;
+        color: white;
+        font-weight: bold;
+    }
+
+    .memory-card:hover .upload-overlay {
+        opacity: 1;
+    }
+
+    .memory-upload {
+        display: none;
+    }
+
+    .character-upload-overlay {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, var(--primary-purple), var(--dark-purple));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        font-size: 1.5rem;
+        border: 2px solid var(--light-purple);
+    }
+
+    .character:hover .character-upload-overlay {
+        opacity: 1;
+    }
+
+    .character-upload-input {
+        display: none;
+    }
+
+    .reset-kiss-btn {
+        background: linear-gradient(135deg, #f59e0b, #dc2626);
+        font-size: 0.9rem;
+        padding: 10px 20px;
+    }
+
+    .reset-kiss-btn:hover {
+        background: linear-gradient(135deg, #dc2626, #f59e0b);
     }
 `;
 document.head.appendChild(style);
