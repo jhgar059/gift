@@ -5,14 +5,9 @@ const CONFIG = {
     // INFORMACIÓN PERSONAL
     // ====================================
 
-    // Nombre de tu pareja (se usará en todo el sitio web)
-    partnerName: "Mi Natha",
-
-    // Tu nombre (opcional, para la firma)
+    partnerName: "Mi Amor",
     yourName: "Jhonsito",
-
-    // Fecha especial (aniversario, primera cita, etc.)
-    specialDate: "24 de Enero de 2026 ",
+    specialDate: "24 de Enero de 2026",
 
 
     // ====================================
@@ -20,42 +15,25 @@ const CONFIG = {
     // ====================================
 
     messages: {
-        // Subtítulo principal en el header
         subtitle: "Iluminas mi mundo de formas que las palabras no pueden expresar ✨",
+        welcome: "Bienvenido/a a Nuestro Espacio Especial 💜",
 
-        // Mensaje de bienvenida
-        welcome: "Bienvenida a Nuestro Espacio Especial 💜",
-
-        // Nota de amor oculta (aparece al hacer clic en el botón)
         loveNote: `Cada momento contigo es un tesoro que guardo en mi corazón. 
-        Eres la razón de mi sonrisa, la luz en mis días más oscuros. 
-        No hay palabras suficientes para describir 
-        lo que significas para mí. Contigo he encontrado
-        eso que siempre soñé pero nunca creí encontrar. Gracias por existir, 
+        Eres la razón de mi sonrisa, la luz en mis días más oscuros, 
+        y el amor de mi vida. No hay palabras suficientes para describir 
+        lo que significas para mí. Contigo he encontrado el amor verdadero, 
+        ese que siempre soñé pero nunca creí encontrar. Gracias por existir, 
         por amarme, y por hacer de cada día una aventura inolvidable. 
-        Te amo y te deseo un feliz cumpleaños. 💜`,
+        Te amo más de lo que jamás podré expresar. 💜`,
 
-        // Descripción de la sección de amor
-        loveDescription: `Este es un lugar creado especialmente para celebrar. 
+        loveDescription: `Este es un lugar creado especialmente para celebrar nuestro amor. 
         Cada rincón aquí está lleno de los momentos que hemos compartido y el amor 
-        que seguimos construyendo día a día. 💕`,
+        que seguimos construyendo día a día. Eres mi todo. 💕`,
 
-        // Mensaje del contador de besos
         kissCounterIntro: "¡Envía besos virtuales a tu amor! 💋",
-
-        // Mensaje de la galería de recuerdos
         memoriesIntro: "Cada momento contigo es especial. Aquí están algunos de nuestros recuerdos más preciados.",
-
-        // Mensaje del medidor de amor
         loveMeterQuestion: "¿Cuánto te amo?",
-
-        // Mensaje de los personajes
         charactersIntro: "Somos dos almas que se encontraron en este vasto universo",
-
-
-        // ====================================
-        // MENSAJES DEL CONTADOR DE BESOS
-        // ====================================
 
         kissMessages: {
             default: "¡Envía besos virtuales! 💋",
@@ -70,11 +48,6 @@ const CONFIG = {
             milestone1000: "¡1000 besos! ¡Nuestro amor no tiene límites! 🚀💜",
         },
 
-
-        // ====================================
-        // TÍTULOS DE SECCIONES
-        // ====================================
-
         sections: {
             love: "Nuestro Amor 💜",
             memories: "Nuestros Recuerdos 📸",
@@ -88,8 +61,18 @@ const CONFIG = {
 
 
     // ====================================
-    // RECUERDOS ESPECIALES
+    // RECUERDOS ESPECIALES CON IMÁGENES
     // ====================================
+    // INSTRUCCIONES:
+    // 1. Crea una carpeta llamada "images" en la raíz del proyecto
+    // 2. Dentro de "images", crea una subcarpeta llamada "memories"
+    // 3. Guarda tus fotos ahí con estos nombres exactos:
+    //    - recuerdo1.jpg
+    //    - recuerdo2.jpg
+    //    - recuerdo3.jpg
+    //    - recuerdo4.jpg
+    //    - recuerdo5.jpg
+    //    - recuerdo6.jpg
 
     memories: [
         {
@@ -97,78 +80,91 @@ const CONFIG = {
             title: "Nuestro Primer Encuentro",
             description: "El día que nuestros caminos se cruzaron por primera vez. Ese momento mágico donde todo comenzó y supimos que algo especial estaba por venir.",
             specialMessage: "Fue amor a primera vista ✨",
-            date: "Fecha del encuentro"
+            date: "Fecha del encuentro",
+            image: "images/memories/recuerdo1.jpg"  // ← CAMBIA ESTA RUTA
         },
         {
             icon: "💕",
             title: "Nuestra Primera Cita",
             description: "Ese momento inolvidable donde todo comenzó oficialmente. Risas interminables, conversaciones profundas y una conexión instantánea que cambió nuestras vidas.",
             specialMessage: "No quería que ese día terminara nunca 💖",
-            date: "Fecha de la primera cita"
+            date: "Fecha de la primera cita",
+            image: "images/memories/recuerdo2.jpg"  // ← CAMBIA ESTA RUTA
         },
         {
             icon: "💜",
             title: "Nuestro Primer Beso",
             description: "El momento en que nuestros labios se encontraron por primera vez. Un instante lleno de magia, nervios y una emoción indescriptible.",
             specialMessage: "Sentí mariposas en el estómago 🦋",
-            date: "Fecha del primer beso"
+            date: "Fecha del primer beso",
+            image: "images/memories/recuerdo3.jpg"  // ← CAMBIA ESTA RUTA
         },
         {
             icon: "🎉",
-            title: "Nuestra primera llamada",
+            title: "Nuestro Aniversario",
             description: "Celebrando el amor que hemos construido juntos, día tras día, momento tras momento. Cada año que pasa, te amo más.",
             specialMessage: "Cada día contigo es una celebración 🎊",
-            date: "Fecha de aniversario"
+            date: "Fecha de aniversario",
+            image: "images/memories/recuerdo4.jpg"  // ← CAMBIA ESTA RUTA
         },
         {
             icon: "🌙",
             title: "Nuestra Noche Especial",
             description: "Esa noche bajo las estrellas donde nos prometimos estar juntos siempre. Un momento lleno de romance y promesas de amor eterno.",
             specialMessage: "Las estrellas fueron testigos de nuestro amor 🌟",
-            date: "Fecha especial"
+            date: "Fecha especial",
+            image: "images/memories/recuerdo5.jpg"  // ← CAMBIA ESTA RUTA
         },
         {
             icon: "🎁",
             title: "Un Regalo Inolvidable",
             description: "Ese momento especial donde me sorprendiste con algo que nunca olvidaré. No fue solo el regalo, sino el amor con el que lo hiciste.",
             specialMessage: "El mejor regalo eres tú 💝",
-            date: "Fecha del regalo"
+            date: "Fecha del regalo",
+            image: "images/memories/recuerdo6.jpg"  // ← CAMBIA ESTA RUTA
         }
     ],
 
 
     // ====================================
-    // DESCRIPCIÓN DE LOS PERSONAJES
+    // DESCRIPCIÓN DE LOS PERSONAJES CON IMÁGENES
     // ====================================
+    // INSTRUCCIONES PARA IMÁGENES DE PERSONAJES:
+    // 1. En la carpeta "images", crea una subcarpeta llamada "characters"
+    // 2. Guarda las fotos con estos nombres:
+    //    - partner.jpg  (foto de tu pareja)
+    //    - you.jpg      (tu foto)
 
     characters: {
         partner: {
-            name: "Mi Amor", // Nombre de tu pareja
+            name: "Mi Amor",
             description: "Mi persona favorita en el mundo entero. Mi todo.",
+            image: "images/characters/partner.jpg",  // ← FOTO DE TU PAREJA
             traits: [
-                "Hermosa 💜",
-                "Cariñosa 💕",
+                "Hermoso/a 💜",
+                "Cariñoso/a 💕",
                 "Increíble ✨",
                 "Inteligente 🧠",
-                "Divertida 😄",
-                "Perfecta 🌟"
+                "Divertido/a 😄",
+                "Perfecto/a 🌟"
             ],
-            clickMessage: "¡Eres absolutamente perfecta para mí! 💜",
+            clickMessage: "¡Eres absolutamente perfecto/a para mí! 💜",
             longDescription: "Eres la persona más maravillosa que he conocido. Tu sonrisa ilumina mis días, tu risa es mi melodía favorita, y tu amor es mi mayor tesoro."
         },
         you: {
-            name: "Yo", // Tu nombre
-            description: "El más afortunado del mundo por tenerte",
+            name: "Yo",
+            description: "El/la más afortunado/a del mundo por tenerte",
+            image: "images/characters/you.jpg",  // ← TU FOTO
             traits: [
-                "Enamorado 💘",
+                "Enamorado/a 💘",
                 "Feliz 😊",
-                "Agradecido 🙏",
-                "Dedicado 💪",
-                "Romántico 🌹",
+                "Agradecido/a 🙏",
+                "Dedicado/a 💪",
+                "Romántico/a 🌹",
                 "Leal 💯"
             ],
             clickMessage: "¡Te amo con todo mi corazón! 💖",
-            longDescription: "Cada día me siento más afortunado de tenerte en mi vida. Prometo amarte, cuidarte y hacerte feliz por siempre."
+            longDescription: "Cada día me siento más afortunado/a de tenerte en mi vida. Prometo amarte, cuidarte y hacerte feliz por siempre."
         }
     },
 
@@ -178,13 +174,13 @@ const CONFIG = {
     // ====================================
 
     loveMeter: {
-        percentage: "∞", // Puedes cambiarlo a un número o dejar infinito
+        percentage: "∞",
         text: "Nuestro amor es infinito 💜",
         description: "El amor que siento por ti no puede medirse en porcentajes. Es infinito, incondicional y eterno.",
         milestones: [
             { value: 25, message: "Empezando a enamorarse 💕" },
-            { value: 50, message: "Muy enamorado 💖" },
-            { value: 75, message: "Completamente enamorado 💜" },
+            { value: 50, message: "Muy enamorado/a 💖" },
+            { value: 75, message: "Completamente enamorado/a 💜" },
             { value: 100, message: "Amor infinito y eterno ∞" }
         ]
     },
@@ -203,7 +199,7 @@ const CONFIG = {
         "Mi lugar favorito es dentro de tus brazos 🤗",
         "Te amo más de lo que las palabras pueden expresar 💬💕",
         "Eres mi siempre y para siempre ♾️",
-        "Contigo aprendí que el amor verdadero existe 💝",
+        "Contigo aprendí que el amor verdadero existe 💍",
         "No necesito el paraíso, te tengo a ti 🌟",
         "Eres mi sueño hecho realidad ✨",
         "Gracias por existir y amarme 🙏💜",
@@ -221,16 +217,17 @@ const CONFIG = {
     // ====================================
     // CONFIGURACIÓN DE MÚSICA
     // ====================================
+    // INSTRUCCIONES PARA LA MÚSICA:
+    // 1. Crea una carpeta llamada "audio" en la raíz del proyecto
+    // 2. Guarda tu canción favorita como "love-song.mp3"
+    // 3. La ruta debe ser: audio/love-song.mp3
 
     music: {
-        enabled: true, // Cambiar a false para desactivar la música
-        autoplay: false, // Cambiar a true para reproducción automática (no recomendado en móviles)
-        volume: 0.5, // Volumen de 0.0 a 1.0
+        enabled: true,
+        autoplay: false,
+        volume: 0.5,
         sources: [
-            // Agrega aquí las rutas a tus archivos de música
-            "audio/love-song.mp3",
-            "audio/romantic-music.mp3",
-            "audio/our-song.mp3"
+            "audio/love-song.mp3"  // ← CAMBIA ESTO SI USAS OTRO NOMBRE
         ],
         title: "Nuestra Canción 🎵"
     },
@@ -241,29 +238,20 @@ const CONFIG = {
     // ====================================
 
     additionalMessages: {
-        // Footer
         footer: "Hecho con 💜 para el amor de mi vida",
         copyright: "© 2025 - Nuestro Amor Eterno",
-
-        // Botones
         clickLoveButton: "Haz clic para revelar una nota especial 💌",
         sendKiss: "Enviar Beso 💋",
         revealNote: "Revelar Nota Especial 💕",
         hideNote: "Ocultar Nota 🙈",
         playMusic: "Reproducir Música 🎵",
         pauseMusic: "Pausar Música ⏸️",
-
-        // Estados
         loading: "Cargando amor... 💜",
         error: "¡Ups! Algo salió mal 😅",
         success: "¡Listo! ✨",
-
-        // Interacciones
         clickCharacter: "Haz clic en los personajes para un mensaje especial 💬",
         clickMemory: "Haz clic en cada recuerdo para revivirlo 📸",
-        sendKissPrompt: "¡No seas tímida! Envía todos los besos que quieras 💋",
-
-        // Mensajes especiales de horas
+        sendKissPrompt: "¡No seas tímido/a! Envía todos los besos que quieras 💋",
         morning: "Buenos días, mi amor ☀️💜",
         afternoon: "Buenas tardes, mi vida 🌤️💕",
         evening: "Buenas noches, mi cielo 🌙✨",
@@ -276,29 +264,18 @@ const CONFIG = {
     // ====================================
 
     effects: {
-        // Corazones flotantes
         floatingHearts: true,
-        heartEmoji: "💜", // Puedes cambiarlo a 💕, 💖, 💗, etc.
-        heartSpeed: 4000, // Velocidad en milisegundos
-        heartFrequency: 2000, // Frecuencia de aparición
-
-        // Destellos/Sparkles
+        heartEmoji: "💜",
+        heartSpeed: 4000,
+        heartFrequency: 2000,
         sparkles: true,
         sparkleCount: 5,
         sparkleEmoji: "✨",
-
-        // Explosión de corazones
         heartBurst: true,
         burstCount: 10,
-
-        // Animaciones generales
         animations: true,
-        animationSpeed: "normal", // "slow", "normal", "fast"
-
-        // Efectos de hover
+        animationSpeed: "normal",
         hoverEffects: true,
-
-        // Confetti en hitos
         confetti: true
     },
 
@@ -308,18 +285,15 @@ const CONFIG = {
     // ====================================
 
     theme: {
-        // Puedes ajustar estos valores si quieres personalizar más
         primaryPurple: "#8b5cf6",
         darkPurple: "#6d28d9",
         deepPurple: "#5b21b6",
         lightPurple: "#a78bfa",
         accentPurple: "#c084fc",
-
         bgBlack: "#0a0a0a",
         bgDark: "#1a1a2e",
         bgDarker: "#0f0f1a",
         bgCard: "#1e1e30",
-
         textPrimary: "#e9d5ff",
         textSecondary: "#c4b5fd",
         textMuted: "#a78bfa"
@@ -331,7 +305,6 @@ const CONFIG = {
     // ====================================
 
     animations: {
-        // Duración de animaciones (en milisegundos)
         heartSpeed: 4000,
         heartFrequency: 2000,
         sparkleCount: 5,
@@ -339,8 +312,6 @@ const CONFIG = {
         messageDisplayTime: 3000,
         fadeInDuration: 500,
         fadeOutDuration: 300,
-
-        // Efectos de partículas
         particleCount: 20,
         particleSpeed: 2
     },
@@ -351,28 +322,17 @@ const CONFIG = {
     // ====================================
 
     advanced: {
-        // Guardar contador de besos en localStorage
         saveKissCount: true,
-
-        // Mostrar frases aleatorias periódicamente
         showRandomQuotes: true,
-        quoteInterval: 30000, // cada 30 segundos
-
-        // Efectos de sonido (si tienes archivos de audio)
+        quoteInterval: 30000,
         soundEffects: {
             enabled: false,
             kissSound: "sounds/kiss.mp3",
             clickSound: "sounds/click.mp3",
             celebrationSound: "sounds/celebration.mp3"
         },
-
-        // Modo oscuro/claro (ya está en dark por defecto)
         darkMode: true,
-
-        // Idioma
-        language: "es", // español
-
-        // Formato de fecha
+        language: "es",
         dateFormat: "DD/MM/YYYY"
     }
 };
@@ -381,12 +341,10 @@ const CONFIG = {
 // NO MODIFICAR A PARTIR DE AQUÍ
 // ====================================
 
-// Exportar configuración para uso en otros archivos
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = CONFIG;
 }
 
-// Función helper para obtener mensaje según hora del día
 function getTimeBasedGreeting() {
     const hour = new Date().getHours();
     if (hour < 12) return CONFIG.additionalMessages.morning;
@@ -395,12 +353,10 @@ function getTimeBasedGreeting() {
     return CONFIG.additionalMessages.night;
 }
 
-// Función helper para obtener frase romántica aleatoria
 function getRandomRomanticQuote() {
     const quotes = CONFIG.romanticQuotes;
     return quotes[Math.floor(Math.random() * quotes.length)];
 }
 
-// Hacer funciones disponibles globalmente
 window.getTimeBasedGreeting = getTimeBasedGreeting;
 window.getRandomRomanticQuote = getRandomRomanticQuote;

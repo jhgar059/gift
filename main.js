@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // If somehow clicked, act like "Yes" was clicked
   noBtn.addEventListener('click', function() {
     saveAnswer('q3', 'Yes (tried to say No but I caught you!)');
-    nextPage('question3', 'memory');
+    nextPage('question3', 'memories');
   });
 });
 
