@@ -6,7 +6,7 @@ const CONFIG = {
     // ====================================
 
     // Nombre de tu pareja (se usará en todo el sitio web)
-    partnerName: "Mi Amor",
+    partnerName: "Mi Natha",
 
     // Tu nombre (opcional, para la firma)
     yourName: "Jhonsito",
@@ -24,21 +24,21 @@ const CONFIG = {
         subtitle: "Iluminas mi mundo de formas que las palabras no pueden expresar ✨",
 
         // Mensaje de bienvenida
-        welcome: "Bienvenido/a a Nuestro Espacio Especial 💜",
+        welcome: "Bienvenida a Nuestro Espacio Especial 💜",
 
         // Nota de amor oculta (aparece al hacer clic en el botón)
         loveNote: `Cada momento contigo es un tesoro que guardo en mi corazón. 
-        Eres la razón de mi sonrisa, la luz en mis días más oscuros, 
-        y el amor de mi vida. No hay palabras suficientes para describir 
-        lo que significas para mí. Contigo he encontrado el amor verdadero, 
-        ese que siempre soñé pero nunca creí encontrar. Gracias por existir, 
+        Eres la razón de mi sonrisa, la luz en mis días más oscuros. 
+        No hay palabras suficientes para describir 
+        lo que significas para mí. Contigo he encontrado
+        eso que siempre soñé pero nunca creí encontrar. Gracias por existir, 
         por amarme, y por hacer de cada día una aventura inolvidable. 
-        Te amo más de lo que jamás podré expresar. 💜`,
+        Te amo y te deseo un feliz cumpleaños. 💜`,
 
         // Descripción de la sección de amor
-        loveDescription: `Este es un lugar creado especialmente para celebrar nuestro amor. 
+        loveDescription: `Este es un lugar creado especialmente para celebrar. 
         Cada rincón aquí está lleno de los momentos que hemos compartido y el amor 
-        que seguimos construyendo día a día. Eres mi todo. 💕`,
+        que seguimos construyendo día a día. 💕`,
 
         // Mensaje del contador de besos
         kissCounterIntro: "¡Envía besos virtuales a tu amor! 💋",
@@ -115,7 +115,7 @@ const CONFIG = {
         },
         {
             icon: "🎉",
-            title: "Nuestro Aniversario",
+            title: "Nuestra primera llamada",
             description: "Celebrando el amor que hemos construido juntos, día tras día, momento tras momento. Cada año que pasa, te amo más.",
             specialMessage: "Cada día contigo es una celebración 🎊",
             date: "Fecha de aniversario"
@@ -146,29 +146,29 @@ const CONFIG = {
             name: "Mi Amor", // Nombre de tu pareja
             description: "Mi persona favorita en el mundo entero. Mi todo.",
             traits: [
-                "Hermoso/a 💜",
-                "Cariñoso/a 💕",
+                "Hermosa 💜",
+                "Cariñosa 💕",
                 "Increíble ✨",
                 "Inteligente 🧠",
-                "Divertido/a 😄",
-                "Perfecto/a 🌟"
+                "Divertida 😄",
+                "Perfecta 🌟"
             ],
-            clickMessage: "¡Eres absolutamente perfecto/a para mí! 💜",
+            clickMessage: "¡Eres absolutamente perfecta para mí! 💜",
             longDescription: "Eres la persona más maravillosa que he conocido. Tu sonrisa ilumina mis días, tu risa es mi melodía favorita, y tu amor es mi mayor tesoro."
         },
         you: {
             name: "Yo", // Tu nombre
-            description: "El/la más afortunado/a del mundo por tenerte",
+            description: "El más afortunado del mundo por tenerte",
             traits: [
-                "Enamorado/a 💘",
+                "Enamorado 💘",
                 "Feliz 😊",
-                "Agradecido/a 🙏",
-                "Dedicado/a 💪",
-                "Romántico/a 🌹",
+                "Agradecido 🙏",
+                "Dedicado 💪",
+                "Romántico 🌹",
                 "Leal 💯"
             ],
             clickMessage: "¡Te amo con todo mi corazón! 💖",
-            longDescription: "Cada día me siento más afortunado/a de tenerte en mi vida. Prometo amarte, cuidarte y hacerte feliz por siempre."
+            longDescription: "Cada día me siento más afortunado de tenerte en mi vida. Prometo amarte, cuidarte y hacerte feliz por siempre."
         }
     },
 
@@ -183,8 +183,8 @@ const CONFIG = {
         description: "El amor que siento por ti no puede medirse en porcentajes. Es infinito, incondicional y eterno.",
         milestones: [
             { value: 25, message: "Empezando a enamorarse 💕" },
-            { value: 50, message: "Muy enamorado/a 💖" },
-            { value: 75, message: "Completamente enamorado/a 💜" },
+            { value: 50, message: "Muy enamorado 💖" },
+            { value: 75, message: "Completamente enamorado 💜" },
             { value: 100, message: "Amor infinito y eterno ∞" }
         ]
     },
@@ -261,7 +261,7 @@ const CONFIG = {
         // Interacciones
         clickCharacter: "Haz clic en los personajes para un mensaje especial 💬",
         clickMemory: "Haz clic en cada recuerdo para revivirlo 📸",
-        sendKissPrompt: "¡No seas tímido/a! Envía todos los besos que quieras 💋",
+        sendKissPrompt: "¡No seas tímida! Envía todos los besos que quieras 💋",
 
         // Mensajes especiales de horas
         morning: "Buenos días, mi amor ☀️💜",
