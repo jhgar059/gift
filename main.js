@@ -5,44 +5,45 @@ const LoveWebsite = () => {
   const [flippedCards, setFlippedCards] = useState({});
   const [showBirthdayAnimation, setShowBirthdayAnimation] = useState(false);
   const [confetti, setConfetti] = useState([]);
+  const [imageErrors, setImageErrors] = useState({});
 
-  // Datos de los mensajes "Nuestro"
+  // Datos de los mensajes "Nuestro" con rutas corregidas
   const ourMessages = [
     {
       id: 1,
       title: "Nuestro Primer Beso 💋",
       message: "Ese momento mágico donde todo comenzó. El primer beso que marcó el inicio de nuestra hermosa historia. Cada recuerdo de ese instante sigue haciéndome sonreír.",
-      image: "images/memories/recuerdo1.jpeg"
+      image: "/images/memories/recuerdo1.jpeg"  // ← Ruta absoluta con "/"
     },
     {
       id: 2,
       title: "Nuestra Primera Cita 🌹",
       message: "Nervios, risas y mariposas en el estómago. Esa primera cita donde supimos que esto era especial. Cada momento contigo es un regalo.",
-      image: "images/memories/recuerdo2.jpeg"
+      image: "/images/memories/recuerdo2.jpeg"
     },
     {
       id: 3,
       title: "Nuestro Primer Viaje ✈️",
       message: "Aventuras juntos, descubriendo nuevos lugares y creando recuerdos inolvidables. Cada viaje a tu lado es una nueva historia de amor.",
-      image: "images/memories/recuerdo3.jpeg"
+      image: "/images/memories/recuerdo3.jpeg"
     },
     {
       id: 4,
       title: "Nuestro Aniversario 🎊",
       message: "Celebrando cada año que pasa a tu lado. Cada aniversario es un recordatorio de lo afortunados que somos de habernos encontrado.",
-      image: "images/memories/recuerdo4.jpeg"
+      image: "/images/memories/recuerdo4.jpeg"
     },
     {
       id: 5,
       title: "Nuestros Momentos Especiales ⭐",
       message: "Esos pequeños momentos que hacen la diferencia. Desde cafés por la mañana hasta películas en la noche, cada instante contigo es especial.",
-      image: "images/memories/recuerdo5.jpeg"
+      image: "/images/memories/recuerdo5.jpeg"
     },
     {
       id: 6,
       title: "Nuestro Futuro Juntos 💫",
       message: "Todo lo que está por venir. Sueños, metas y una vida entera para compartir. El mejor está por llegar, y lo viviremos juntos.",
-      image: "images/memories/recuerdo6.jpeg"
+      image: "/images/memories/recuerdo6.jpeg"
     }
   ];
 
@@ -77,6 +78,15 @@ const LoveWebsite = () => {
     setTimeout(() => setConfetti([]), 4000);
   };
 
+  const handleImageError = (id) => {
+    setImageErrors(prev => ({ ...prev, [id]: true }));
+    console.warn(`Imagen no encontrada para el recuerdo ${id}`);
+  };
+
+  const getPlaceholderSVG = (icon) => {
+    return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%239333ea' width='400' height='300'/%3E%3Ctext fill='%23fff' font-size='60' font-family='Arial' x='50%25' y='50%25' text-anchor='middle' dominant-baseline='middle'%3E${icon}%3C/text%3E%3C/svg%3E`;
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-purple-800 text-white">
       {/* Header */}
@@ -93,9 +103,9 @@ const LoveWebsite = () => {
           {/* Mi Amor Card */}
           <div className="bg-gradient-to-br from-purple-600/30 to-pink-600/30 backdrop-blur-sm rounded-3xl p-8 border-2 border-purple-400/50 shadow-2xl transform hover:scale-105 transition-all duration-300">
             <div className="flex justify-center mb-6">
-              <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-pink-400 shadow-lg">
+              <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-pink-400 shadow-lg bg-gradient-to-br from-pink-400 to-purple-400">
                 <img
-                  src="images/characters/partner.jpeg"
+                  src="/images/characters/partner.jpeg"
                   alt="Mi Amor"
                   className="w-full h-full object-cover"
                   onError={(e) => {
@@ -103,7 +113,7 @@ const LoveWebsite = () => {
                     e.target.nextSibling.style.display = 'flex';
                   }}
                 />
-                <div className="w-full h-full bg-gradient-to-br from-pink-400 to-purple-400 flex items-center justify-center text-6xl hidden">
+                <div className="w-full h-full flex items-center justify-center text-6xl" style={{ display: 'none' }}>
                   💖
                 </div>
               </div>
@@ -125,9 +135,9 @@ const LoveWebsite = () => {
           {/* Yo Card */}
           <div className="bg-gradient-to-br from-indigo-600/30 to-purple-600/30 backdrop-blur-sm rounded-3xl p-8 border-2 border-indigo-400/50 shadow-2xl transform hover:scale-105 transition-all duration-300">
             <div className="flex justify-center mb-6">
-              <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-indigo-400 shadow-lg">
+              <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-indigo-400 shadow-lg bg-gradient-to-br from-indigo-400 to-purple-400">
                 <img
-                  src="images/characters/you.jpeg"
+                  src="/images/characters/you.jpeg"
                   alt="Yo"
                   className="w-full h-full object-cover"
                   onError={(e) => {
@@ -135,7 +145,7 @@ const LoveWebsite = () => {
                     e.target.nextSibling.style.display = 'flex';
                   }}
                 />
-                <div className="w-full h-full bg-gradient-to-br from-indigo-400 to-purple-400 flex items-center justify-center text-6xl hidden">
+                <div className="w-full h-full flex items-center justify-center text-6xl" style={{ display: 'none' }}>
                   😊
                 </div>
               </div>
@@ -163,6 +173,13 @@ const LoveWebsite = () => {
           Nuestros Recuerdos 📸
         </h2>
 
+        {/* Mensaje de ayuda si faltan imágenes */}
+        <div className="text-center mb-8 bg-purple-600/20 backdrop-blur-sm rounded-lg p-4 max-w-2xl mx-auto border border-purple-400/30">
+          <p className="text-purple-200 text-sm">
+            💡 <strong>Consejo:</strong> Para ver tus fotos, crea una carpeta <code className="bg-purple-900/50 px-2 py-1 rounded">public/images/memories/</code> y coloca ahí tus imágenes como recuerdo1.jpeg, recuerdo2.jpeg, etc.
+          </p>
+        </div>
+
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {ourMessages.map((item) => (
             <div
@@ -181,7 +198,7 @@ const LoveWebsite = () => {
               >
                 {/* Frente de la tarjeta */}
                 <div
-                  className="absolute w-full h-full backface-hidden bg-gradient-to-br from-purple-600/40 to-pink-600/40 backdrop-blur-sm rounded-2xl border-2 border-purple-400/50 shadow-2xl p-6 flex flex-col items-center justify-center"
+                  className="absolute w-full h-full backface-hidden bg-gradient-to-br from-purple-600/40 to-pink-600/40 backdrop-blur-sm rounded-2xl border-2 border-purple-400/50 shadow-2xl p-6 flex flex-col items-center justify-center hover:border-pink-400/70 transition-colors"
                   style={{ backfaceVisibility: 'hidden' }}
                 >
                   <div className="text-6xl mb-4">❤️</div>
@@ -199,13 +216,14 @@ const LoveWebsite = () => {
                     transform: 'rotateY(180deg)'
                   }}
                 >
-                  <div className="h-48 overflow-hidden">
+                  <div className="h-48 overflow-hidden bg-gradient-to-br from-purple-500/30 to-indigo-500/30">
                     <img
                       src={item.image}
                       alt={item.title}
                       className="w-full h-full object-cover"
                       onError={(e) => {
-                        e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%239333ea" width="400" height="300"/%3E%3Ctext fill="%23fff" font-size="24" font-family="Arial" x="50%25" y="50%25" text-anchor="middle" dominant-baseline="middle"%3E📸%3C/text%3E%3C/svg%3E';
+                        handleImageError(item.id);
+                        e.target.src = getPlaceholderSVG(item.title.split(' ')[0]);
                       }}
                     />
                   </div>
@@ -234,7 +252,7 @@ const LoveWebsite = () => {
               onClick={handleCakeClick}
               className="transform hover:scale-110 transition-all duration-300 focus:outline-none"
             >
-              <div className="bg-gradient-to-br from-pink-400/30 to-purple-400/30 backdrop-blur-sm rounded-full p-12 border-4 border-pink-400/50 shadow-2xl">
+              <div className="bg-gradient-to-br from-pink-400/30 to-purple-400/30 backdrop-blur-sm rounded-full p-12 border-4 border-pink-400/50 shadow-2xl hover:border-pink-300/70">
                 <Cake size={120} className="text-pink-300" />
               </div>
             </button>
