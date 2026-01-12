@@ -80,7 +80,7 @@ const LoveWebsite = () => {
 
   const handleImageError = (id) => {
     setImageErrors(prev => ({ ...prev, [id]: true }));
-    console.warn(`Imagen no encontrada para el recuerdo ${id}`);
+    console.warn(`Imagen no encontrada para recuerdo ${id}`);
   };
 
   const getPlaceholderSVG = (icon) => {
