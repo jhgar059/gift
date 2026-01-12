@@ -81,7 +81,7 @@ const CONFIG = {
             description: "El día que nuestros caminos se cruzaron por primera vez. Ese momento mágico donde todo comenzó y supimos que algo especial estaba por venir.",
             specialMessage: "Fue amor a primera vista ✨",
             date: "Fecha del encuentro",
-            image: "/images/memories/recuerdo1.jpeg"  // ← CAMBIA ESTA RUTA
+            image: "/images/memories/recuerdo1.jpeg.jpeg"  // ← CAMBIA ESTA RUTA
         },
         {
             icon: "💕",
@@ -139,7 +139,7 @@ const CONFIG = {
         partner: {
             name: "Mi Amor",
             description: "Mi persona favorita en el mundo entero. Mi todo.",
-            image: "images/characters/partner.jpg",  // ← FOTO DE TU PAREJA
+            image: "images/characters/partner.jepg",  // ← FOTO DE TU PAREJA
             traits: [
                 "Hermoso/a 💜",
                 "Cariñoso/a 💕",
@@ -154,7 +154,7 @@ const CONFIG = {
         you: {
             name: "Yo",
             description: "El/la más afortunado/a del mundo por tenerte",
-            image: "images/characters/you.jpg",  // ← TU FOTO
+            image: "images/characters/you.jpeg",  // ← TU FOTO
             traits: [
                 "Enamorado/a 💘",
                 "Feliz 😊",
