@@ -13,37 +13,37 @@ const LoveWebsite = () => {
       id: 1,
       title: "Nuestro Primer Beso 💋",
       message: "Ese momento mágico donde todo comenzó. El primer beso que marcó el inicio de nuestra hermosa historia. Cada recuerdo de ese instante sigue haciéndome sonreír.",
-      image: "/images/memories/recuerdo1.jpeg"  // ← Ruta absoluta con "/"
+      image: "/images/memories/abc.jpeg"  // ← Ruta absoluta con "/"
     },
     {
       id: 2,
       title: "Nuestra Primera Cita 🌹",
       message: "Nervios, risas y mariposas en el estómago. Esa primera cita donde supimos que esto era especial. Cada momento contigo es un regalo.",
-      image: "/images/memories/recuerdo2.jpeg"
+      image: "/images/memories/abcd.jpeg"
     },
     {
       id: 3,
       title: "Nuestro Primer Viaje ✈️",
       message: "Aventuras juntos, descubriendo nuevos lugares y creando recuerdos inolvidables. Cada viaje a tu lado es una nueva historia de amor.",
-      image: "/images/memories/recuerdo3.jpeg"
+      image: "/images/memories/abcde.jpeg"
     },
     {
       id: 4,
       title: "Nuestro Aniversario 🎊",
       message: "Celebrando cada año que pasa a tu lado. Cada aniversario es un recordatorio de lo afortunados que somos de habernos encontrado.",
-      image: "/images/memories/recuerdo4.jpeg"
+      image: "/images/memories/abcdef.jpeg"
     },
     {
       id: 5,
       title: "Nuestros Momentos Especiales ⭐",
       message: "Esos pequeños momentos que hacen la diferencia. Desde cafés por la mañana hasta películas en la noche, cada instante contigo es especial.",
-      image: "/images/memories/recuerdo5.jpeg"
+      image: "/images/memories/abcdefg.jpeg"
     },
     {
       id: 6,
       title: "Nuestro Futuro Juntos 💫",
       message: "Todo lo que está por venir. Sueños, metas y una vida entera para compartir. El mejor está por llegar, y lo viviremos juntos.",
-      image: "/images/memories/recuerdo6.jpeg"
+      image: "/images/memories/abcdefgh.jpeg"
     }
   ];
 
@@ -105,7 +105,7 @@ const LoveWebsite = () => {
             <div className="flex justify-center mb-6">
               <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-pink-400 shadow-lg bg-gradient-to-br from-pink-400 to-purple-400">
                 <img
-                  src="/images/characters/partner.jpeg"
+                  src="/images/characters/uwu.jpeg"
                   alt="Mi Amor"
                   className="w-full h-full object-cover"
                   onError={(e) => {

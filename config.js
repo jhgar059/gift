@@ -81,7 +81,7 @@ const CONFIG = {
             description: "El día que nuestros caminos se cruzaron por primera vez. Ese momento mágico donde todo comenzó y supimos que algo especial estaba por venir.",
             specialMessage: "Fue amor a primera vista ✨",
             date: "Fecha del encuentro",
-            image: "/images/memories/recuerdo1.jpeg.jpeg"  // ← CAMBIA ESTA RUTA
+            image: "/images/memories/abc.jpeg"  // ← CAMBIA ESTA RUTA
         },
         {
             icon: "💕",
@@ -89,7 +89,7 @@ const CONFIG = {
             description: "Ese momento inolvidable donde todo comenzó oficialmente. Risas interminables, conversaciones profundas y una conexión instantánea que cambió nuestras vidas.",
             specialMessage: "No quería que ese día terminara nunca 💖",
             date: "Fecha de la primera cita",
-            image: "/images/memories/recuerdo2.jpeg"  // ← CAMBIA ESTA RUTA
+            image: "/images/memories/abcd.jpeg"  // ← CAMBIA ESTA RUTA
         },
         {
             icon: "💜",
@@ -97,7 +97,7 @@ const CONFIG = {
             description: "El momento en que nuestros labios se encontraron por primera vez. Un instante lleno de magia, nervios y una emoción indescriptible.",
             specialMessage: "Sentí mariposas en el estómago 🦋",
             date: "Fecha del primer beso",
-            image: "/images/memories/recuerdo3.jpeg"  // ← CAMBIA ESTA RUTA
+            image: "/images/memories/abcde.jpeg"  // ← CAMBIA ESTA RUTA
         },
         {
             icon: "🎉",
@@ -105,7 +105,7 @@ const CONFIG = {
             description: "Celebrando el amor que hemos construido juntos, día tras día, momento tras momento. Cada año que pasa, te amo más.",
             specialMessage: "Cada día contigo es una celebración 🎊",
             date: "Fecha de aniversario",
-            image: "/images/memories/recuerdo4.jpeg"  // ← CAMBIA ESTA RUTA
+            image: "/images/memories/abcdef.jpeg"  // ← CAMBIA ESTA RUTA
         },
         {
             icon: "🌙",
@@ -113,7 +113,7 @@ const CONFIG = {
             description: "Esa noche bajo las estrellas donde nos prometimos estar juntos siempre. Un momento lleno de romance y promesas de amor eterno.",
             specialMessage: "Las estrellas fueron testigos de nuestro amor 🌟",
             date: "Fecha especial",
-            image: "/images/memories/recuerdo5.jpeg"  // ← CAMBIA ESTA RUTA
+            image: "/images/memories/abcdefg.jpeg"  // ← CAMBIA ESTA RUTA
         },
         {
             icon: "🎁",
@@ -121,7 +121,7 @@ const CONFIG = {
             description: "Ese momento especial donde me sorprendiste con algo que nunca olvidaré. No fue solo el regalo, sino el amor con el que lo hiciste.",
             specialMessage: "El mejor regalo eres tú 💝",
             date: "Fecha del regalo",
-            image: "/images/memories/recuerdo6.jpeg"  // ← CAMBIA ESTA RUTA
+            image: "/images/memories/abcdefgh.jpeg"  // ← CAMBIA ESTA RUTA
         }
     ],
 
@@ -139,7 +139,7 @@ const CONFIG = {
         partner: {
             name: "Mi Amor",
             description: "Mi persona favorita en el mundo entero. Mi todo.",
-            image: "images/characters/partner.jepg",  // ← FOTO DE TU PAREJA
+            image: "images/characters/uwu.jpeg",  // ← FOTO DE TU PAREJA
             traits: [
                 "Hermoso/a 💜",
                 "Cariñoso/a 💕",
