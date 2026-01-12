@@ -13,37 +13,37 @@ const LoveWebsite = () => {
       id: 1,
       title: "Nuestro Primer Beso 💋",
       message: "Ese momento mágico donde todo comenzó. El primer beso que marcó el inicio de nuestra hermosa historia. Cada recuerdo de ese instante sigue haciéndome sonreír.",
-      image: "/images/memories/abc.jpeg"  // ← Ruta absoluta con "/"
+      image: "/images/memories/a.jpeg"  // ← Ruta absoluta con "/"
     },
     {
       id: 2,
       title: "Nuestra Primera Cita 🌹",
       message: "Nervios, risas y mariposas en el estómago. Esa primera cita donde supimos que esto era especial. Cada momento contigo es un regalo.",
-      image: "/images/memories/abcd.jpeg"
+      image: "/images/memories/b.jpeg"
     },
     {
       id: 3,
       title: "Nuestro Primer Viaje ✈️",
       message: "Aventuras juntos, descubriendo nuevos lugares y creando recuerdos inolvidables. Cada viaje a tu lado es una nueva historia de amor.",
-      image: "/images/memories/abcde.jpeg"
+      image: "/images/memories/c.jpeg"
     },
     {
       id: 4,
       title: "Nuestro Aniversario 🎊",
       message: "Celebrando cada año que pasa a tu lado. Cada aniversario es un recordatorio de lo afortunados que somos de habernos encontrado.",
-      image: "/images/memories/abcdef.jpeg"
+      image: "/images/memories/d.jpeg"
     },
     {
       id: 5,
       title: "Nuestros Momentos Especiales ⭐",
       message: "Esos pequeños momentos que hacen la diferencia. Desde cafés por la mañana hasta películas en la noche, cada instante contigo es especial.",
-      image: "/images/memories/abcdefg.jpeg"
+      image: "/images/memories/z.jpeg"
     },
     {
       id: 6,
       title: "Nuestro Futuro Juntos 💫",
       message: "Todo lo que está por venir. Sueños, metas y una vida entera para compartir. El mejor está por llegar, y lo viviremos juntos.",
-      image: "/images/memories/abcdefgh.jpeg"
+      image: "/images/memories/r.jpeg"
     }
   ];
 

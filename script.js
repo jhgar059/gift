@@ -3,7 +3,7 @@
 // ====================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Inicializar todo
+    // Inicializar
     initializePage();
     setupEventListeners();
     setupFloatingHearts();
