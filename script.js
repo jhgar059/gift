@@ -3,6 +3,7 @@
 // ====================================
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar todo
     initializePage();
     setupEventListeners();
     setupFloatingHearts();
@@ -27,10 +28,14 @@ function initializePage() {
     document.querySelectorAll('.character-description')[0].textContent = CONFIG.characters.partner.description;
     document.querySelectorAll('.character-description')[1].textContent = CONFIG.characters.you.description;
 
-    // Cargar imágenes de personajes (usando las rutas correctas del config)
+    // Cargar imágenes de personajes
     const characterImgs = document.querySelectorAll('.character img');
-    characterImgs[0].src = CONFIG.characters.partner.image;
-    characterImgs[1].src = CONFIG.characters.you.image;
+    if (CONFIG.characters.partner.image) {
+        characterImgs[0].src = CONFIG.characters.partner.image;
+    }
+    if (CONFIG.characters.you.image) {
+        characterImgs[1].src = CONFIG.characters.you.image;
+    }
 
     // Cargar nota de amor
     document.querySelector('.love-note-text').textContent = CONFIG.messages.loveNote;
@@ -163,7 +168,7 @@ function createFloatingKiss() {
 }
 
 // ====================================
-// SISTEMA DE RECUERDOS CON TARJETAS FLIP
+// SISTEMA DE RECUERDOS CON TARJETAS FLIP E IMÁGENES
 // ====================================
 
 function setupMemories() {
@@ -186,6 +191,9 @@ function createFlipCard(memory, index) {
         cursor: pointer;
     `;
 
+    // Crear placeholder SVG en caso de error
+    const placeholderSVG = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%239333ea' width='400' height='300'/%3E%3Ctext fill='%23fff' font-size='60' font-family='Arial' x='50%25' y='50%25' text-anchor='middle' dominant-baseline='middle'%3E${encodeURIComponent(memory.icon)}%3C/text%3E%3C/svg%3E`;
+
     cardContainer.innerHTML = `
         <div class="flip-card" style="
             position: relative;
@@ -194,6 +202,7 @@ function createFlipCard(memory, index) {
             transition: transform 0.8s;
             transform-style: preserve-3d;
         ">
+            <!-- FRENTE DE LA TARJETA -->
             <div class="flip-card-front" style="
                 position: absolute;
                 width: 100%;
@@ -214,6 +223,8 @@ function createFlipCard(memory, index) {
                 <h3 style="font-size: 1.8rem; margin-bottom: 15px; text-align: center; color: #e9d5ff;">${memory.title}</h3>
                 <p style="text-align: center; font-size: 0.9rem; color: #c4b5fd;">Haz click para ver más</p>
             </div>
+            
+            <!-- REVERSO DE LA TARJETA CON IMAGEN -->
             <div class="flip-card-back" style="
                 position: absolute;
                 width: 100%;
@@ -227,20 +238,41 @@ function createFlipCard(memory, index) {
                 transform: rotateY(180deg);
                 box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             ">
-                <div style="height: 50%; overflow: hidden;">
-                    <img src="${memory.image}" alt="${memory.title}" style="
+                <!-- CONTENEDOR DE IMAGEN -->
+                <div style="height: 50%; overflow: hidden; background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(99, 102, 241, 0.2)); position: relative;">
+                    <img 
+                        src="${memory.image}" 
+                        alt="${memory.title}" 
+                        data-memory-id="${index}"
+                        style="
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            display: block;
+                        "
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                    >
+                    <!-- PLACEHOLDER SI FALLA LA IMAGEN -->
+                    <div style="
+                        display: none;
                         width: 100%;
                         height: 100%;
-                        object-fit: cover;
-                    " onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22%3E%3Crect fill=%22%239333ea%22 width=%22400%22 height=%22300%22/%3E%3Ctext fill=%22%23fff%22 font-size=%2240%22 font-family=%22Arial%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E${memory.icon}%3C/text%3E%3C/svg%3E'">
+                        align-items: center;
+                        justify-content: center;
+                        background: linear-gradient(135deg, rgba(139, 92, 246, 0.4), rgba(99, 102, 241, 0.4));
+                        font-size: 80px;
+                    ">${memory.icon}</div>
                 </div>
-                <div style="padding: 25px; height: 50%; overflow-y: auto;">
-                    <p style="text-align: center; font-size: 0.95rem; line-height: 1.6; color: #e9d5ff;">
+                
+                <!-- CONTENEDOR DE TEXTO -->
+                <div style="padding: 25px; height: 50%; overflow-y: auto; display: flex; flex-direction: column; justify-content: center;">
+                    <p style="text-align: center; font-size: 0.95rem; line-height: 1.6; color: #e9d5ff; margin-bottom: 12px;">
                         ${memory.description}
                     </p>
-                    <p style="text-align: center; margin-top: 15px; font-style: italic; color: #c4b5fd; font-size: 0.9rem;">
+                    <p style="text-align: center; font-style: italic; color: #c4b5fd; font-size: 0.9rem;">
                         ${memory.specialMessage}
                     </p>
+                    ${memory.date ? `<p style="text-align: center; margin-top: 10px; font-size: 0.85rem; color: #a78bfa; opacity: 0.8;">📅 ${memory.date}</p>` : ''}
                 </div>
             </div>
         </div>
@@ -249,12 +281,60 @@ function createFlipCard(memory, index) {
     const flipCard = cardContainer.querySelector('.flip-card');
     let isFlipped = false;
 
+    // Evento de click para girar la tarjeta
     cardContainer.addEventListener('click', () => {
         isFlipped = !isFlipped;
         flipCard.style.transform = isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
+
+        // Pequeña animación adicional
+        if (isFlipped) {
+            createSparkles(cardContainer);
+
+            // Log para debug
+            const img = flipCard.querySelector('img');
+            if (img && img.style.display !== 'none') {
+                console.log(`✅ Imagen cargada: ${memory.title} - ${memory.image}`);
+            } else {
+                console.warn(`⚠️ Imagen no encontrada: ${memory.title} - ${memory.image}`);
+            }
+        }
+    });
+
+    // Efecto hover
+    cardContainer.addEventListener('mouseenter', () => {
+        if (!isFlipped) {
+            flipCard.style.transform = 'scale(1.02) translateY(-5px)';
+        }
+    });
+
+    cardContainer.addEventListener('mouseleave', () => {
+        if (!isFlipped) {
+            flipCard.style.transform = 'scale(1) translateY(0)';
+        } else {
+            flipCard.style.transform = 'rotateY(180deg)';
+        }
     });
 
     return cardContainer;
+}
+
+function createSparkles(element) {
+    const rect = element.getBoundingClientRect();
+    for (let i = 0; i < 5; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.textContent = '✨';
+        sparkle.style.cssText = `
+            position: fixed;
+            left: ${rect.left + Math.random() * rect.width}px;
+            top: ${rect.top + Math.random() * rect.height}px;
+            font-size: 20px;
+            pointer-events: none;
+            z-index: 9999;
+            animation: sparkleFloat 1s ease-out forwards;
+        `;
+        document.body.appendChild(sparkle);
+        setTimeout(() => sparkle.remove(), 1000);
+    }
 }
 
 // ====================================
@@ -271,7 +351,6 @@ function setupCharacters() {
         const isPartner = index === 0;
         const config = isPartner ? CONFIG.characters.partner : CONFIG.characters.you;
 
-        // Actualizar estilos de la tarjeta
         char.style.cssText = `
             background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2));
             backdrop-filter: blur(10px);
@@ -284,9 +363,11 @@ function setupCharacters() {
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         `;
 
-        // Actualizar imagen
         const img = char.querySelector('img');
-        img.src = config.image;
+        if (config.image) {
+            img.src = config.image;
+        }
+
         img.style.cssText = `
             width: 150px;
             height: 150px;
@@ -297,7 +378,6 @@ function setupCharacters() {
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         `;
 
-        // Manejar error de imagen
         img.onerror = function() {
             this.style.display = 'none';
             const placeholder = document.createElement('div');
@@ -316,22 +396,21 @@ function setupCharacters() {
             this.parentNode.insertBefore(placeholder, this);
         };
 
-        // Agregar traits
-        const traitsDiv = document.createElement('div');
-        traitsDiv.style.cssText = 'display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 15px;';
-        traitsDiv.innerHTML = config.traits.map(trait =>
-            `<span style="
-                background: rgba(139, 92, 246, 0.3);
-                padding: 5px 12px;
-                border-radius: 15px;
-                font-size: 0.85rem;
-                border: 1px solid rgba(139, 92, 246, 0.5);
-            ">${trait}</span>`
-        ).join('');
+        if (config.traits) {
+            const traitsDiv = document.createElement('div');
+            traitsDiv.style.cssText = 'display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 15px;';
+            traitsDiv.innerHTML = config.traits.map(trait =>
+                `<span style="
+                    background: rgba(139, 92, 246, 0.3);
+                    padding: 5px 12px;
+                    border-radius: 15px;
+                    font-size: 0.85rem;
+                    border: 1px solid rgba(139, 92, 246, 0.5);
+                ">${trait}</span>`
+            ).join('');
+            char.appendChild(traitsDiv);
+        }
 
-        char.appendChild(traitsDiv);
-
-        // Efecto hover
         char.addEventListener('mouseenter', () => {
             char.style.transform = 'translateY(-10px) scale(1.05)';
             char.style.boxShadow = '0 15px 40px rgba(139, 92, 246, 0.4)';
@@ -342,7 +421,6 @@ function setupCharacters() {
             char.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.3)';
         });
 
-        // Evento click
         char.addEventListener('click', function() {
             showNotification(config.clickMessage);
             createHeartBurst(this);
@@ -359,15 +437,12 @@ function setupLoveMeter() {
     const percentage = CONFIG.loveMeter.percentage;
     const meterSection = document.querySelector('#love-meter-section');
 
-    // Configurar estilos iniciales
     meterFill.style.width = '0%';
     meterFill.style.transition = 'width 2s ease-out';
 
-    // Crear observer para animar cuando sea visible
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Animar el llenado
                 setTimeout(() => {
                     if (percentage === '∞' || percentage === 'infinito') {
                         meterFill.style.width = '100%';
@@ -385,7 +460,6 @@ function setupLoveMeter() {
 
     observer.observe(meterSection);
 
-    // Agregar texto debajo
     const meterContainer = document.querySelector('.love-meter');
     const textDiv = document.createElement('div');
     textDiv.style.cssText = 'margin-top: 25px;';
@@ -508,7 +582,6 @@ function showBirthdayAnimation() {
         setTimeout(() => overlay.remove(), 300);
     }, 5000);
 
-    // Click para cerrar
     overlay.addEventListener('click', () => {
         overlay.style.opacity = '0';
         setTimeout(() => overlay.remove(), 300);
@@ -719,6 +792,17 @@ style.textContent = `
         }
         50% {
             transform: scale(1.05);
+        }
+    }
+    
+    @keyframes sparkleFloat {
+        0% {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-50px) scale(0);
+            opacity: 0;
         }
     }
 `;
