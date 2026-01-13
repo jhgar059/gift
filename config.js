@@ -15,20 +15,24 @@ const CONFIG = {
     // ====================================
 
     messages: {
-        subtitle: "Iluminas mi mundo de formas que las palabras no pueden expresar ✨",
-        welcome: "Bienvenido/a a Nuestro Espacio Especial 💜",
+        subtitle: "Iluminas mi mundo de formas en las que no imaginas ✨",
+        welcome: "Bienvenida a Nuestro Espacio Especial 💜",
 
-        loveNote: `Cada momento contigo es un tesoro que guardo en mi corazón. 
-        Eres la razón de mi sonrisa, la luz en mis días más oscuros, 
-        y el amor de mi vida. No hay palabras suficientes para describir 
-        lo que significas para mí. Contigo he encontrado el amor verdadero, 
-        ese que siempre soñé pero nunca creí encontrar. Gracias por existir, 
-        por amarme, y por hacer de cada día una aventura inolvidable. 
-        Te amo más de lo que jamás podré expresar. 💜`,
+        loveNote: `Feliz cumpleaños, mi amor. Hoy celebro tu vida y lo afortunado que soy de tenerte 
+        a mi lado; gracias por ser luz, calma y alegría en mis días. Te quiero más de lo que a veces sé decir,
+        admiro tu esencia y todo lo que eres, este dia te traiga sonrisas, sueños cumplidos 
+        y mucha paz. Ojalá pueda seguir acompañándote, cuidándote y amándote cada día un poquito más. 
+        Eres una persona increibe, tienes muchas cualidades que muchas personas les gustaria tener, 
+        admiro tu manera de ver la vida, de persistencia, y que a pesar de todo lo que has vivido en tus años
+        sigues siendo una persona muy noble, muy tierna, muy sencilla, y sumado que eres una muy buena mamá
+        Admiro tu dulzura, tu fortaleza, tu forma única de amar y la paz que traes a mi vida; 
+        contigo todo se siente más bonito, y deseo que este nuevo año te regale todo lo maravilloso que mereces,
+        porque eres magia, eres amor y eres lo mejor que me ha pasado. Estoy ansioso de verte pronto
+        Te amo mi chiquita de ojitos lindos. 💖✨💜`,
 
-        loveDescription: `Este es un lugar creado especialmente para celebrar nuestro amor. 
+        loveDescription: `Este es un lugar creado especialmente para celebrar. 
         Cada rincón aquí está lleno de los momentos que hemos compartido y el amor 
-        que seguimos construyendo día a día. Eres mi todo. 💕`,
+        que seguimos construyendo día a día. 💕`,
 
         kissCounterIntro: "¡Envía besos virtuales a tu amor! 💋",
         memoriesIntro: "Cada momento contigo es especial. Aquí están algunos de nuestros recuerdos más preciados.",
@@ -60,59 +64,45 @@ const CONFIG = {
     },
 
 
-    // ====================================
-    // RECUERDOS ESPECIALES CON IMÁGENES
-    // ====================================
-    // INSTRUCCIONES:
-    // 1. Crea una carpeta llamada "images" en la raíz del proyecto
-    // 2. Dentro de "images", crea una subcarpeta llamada "memories"
-    // 3. Guarda tus fotos ahí con estos nombres exactos:
-    //    - recuerdo1.jpg
-    //    - recuerdo2.jpg
-    //    - recuerdo3.jpg
-    //    - recuerdo4.jpg
-    //    - recuerdo5.jpg
-    //    - recuerdo6.jpg
-
     memories: [
         {
             icon: "🌟",
             title: "Nuestro Primer Encuentro",
-            description: "El día que nuestros caminos se cruzaron por primera vez. Ese momento mágico donde todo comenzó y supimos que algo especial estaba por venir.",
+            description: "El día que nuestros caminos se cruzaron por primera vez. Ese momento donde todo comenzó y supimos que algo especial estaba por venir.",
             specialMessage: "Fue amor a primera vista ✨",
-            date: "Fecha del encuentro",
+            date: "4 de Julio de 2025",
             image: "images/memories/a.jpeg"  // ← CAMBIA ESTA RUTA
         },
         {
             icon: "💕",
             title: "Nuestra Primera Cita",
-            description: "Ese momento inolvidable donde todo comenzó oficialmente. Risas interminables, conversaciones profundas y una conexión instantánea que cambió nuestras vidas.",
+            description: "Nervios, risas y mariposas en el estómago. Esa primera cita donde supimos que esto era especial. Cada momento contigo es un regalo.",
             specialMessage: "No quería que ese día terminara nunca 💖",
-            date: "Fecha de la primera cita",
+            date: "4 de Julio de 2025",
             image: "images/memories/b.jpeg"  // ← CAMBIA ESTA RUTA
         },
         {
             icon: "💜",
             title: "Nuestro Primer Beso",
-            description: "El momento en que nuestros labios se encontraron por primera vez. Un instante lleno de magia, nervios y una emoción indescriptible.",
+            description: "El momento en que nuestros labios se encontraron por primera vez. Cada recuerdo de ese instante sigue haciéndome sonreír.",
             specialMessage: "Sentí mariposas en el estómago 🦋",
-            date: "Fecha del primer beso",
+            date: "4 de Julio de 2025",
             image: "images/memories/c.jpeg"  // ← CAMBIA ESTA RUTA
         },
         {
             icon: "🎉",
-            title: "Nuestro Aniversario",
-            description: "Celebrando el amor que hemos construido juntos, día tras día, momento tras momento. Cada año que pasa, te amo más.",
+            title: "Nuestras llamdas",
+            description: "Esas largas conversaciones que nunca terminan. Hablando de todo y de nada, sintiéndonos más cerca a pesar de la distancia.",
             specialMessage: "Cada día contigo es una celebración 🎊",
-            date: "Fecha de aniversario",
+            date: "Han sido muchas fechas 😂",
             image: "images/memories/d.jpeg"  // ← CAMBIA ESTA RUTA
         },
         {
             icon: "🌙",
             title: "Nuestra Noche Especial",
-            description: "Esa noche bajo las estrellas donde nos prometimos estar juntos siempre. Un momento lleno de romance y promesas de amor eterno.",
+            description: "Esa noche donde por fin nos vimos frente a frente. Un momento lleno de muchas emociones, de expectativas, una noche innolvidable.",
             specialMessage: "Las estrellas fueron testigos de nuestro amor 🌟",
-            date: "Fecha especial",
+            date: "4 de Julio de 2025",
             image: "images/memories/z.jpeg"  // ← CAMBIA ESTA RUTA
         },
         {
@@ -120,51 +110,50 @@ const CONFIG = {
             title: "Un Regalo Inolvidable",
             description: "Ese momento especial donde me sorprendiste con algo que nunca olvidaré. No fue solo el regalo, sino el amor con el que lo hiciste.",
             specialMessage: "El mejor regalo eres tú 💝",
-            date: "Fecha del regalo",
+            date: "6 de Agosto de 2025",
             image: "images/memories/r.jpeg"  // ← CAMBIA ESTA RUTA
-        }
+        },
+        {
+            icon: "💫",
+            title: "Nuestro Futuro Juntos 💫",
+            description: "Todo lo que está por venir. Sueños, metas y cada momento para compartir. El mejor está por llegar, y lo viviremos juntos.",
+            specialMessage: "El mejor regalo eres tú 💝",
+            date: "2 de Junio de 2026 - ♾️",
+            image: "images/memories/p.jpeg",  // ← CAMBIA ESTA RUTA
+        },
     ],
 
-
-    // ====================================
-    // DESCRIPCIÓN DE LOS PERSONAJES CON IMÁGENES
-    // ====================================
-    // INSTRUCCIONES PARA IMÁGENES DE PERSONAJES:
-    // 1. En la carpeta "images", crea una subcarpeta llamada "characters"
-    // 2. Guarda las fotos con estos nombres:
-    //    - partner.jpg  (foto de tu pareja)
-    //    - you.jpg      (tu foto)
 
     characters: {
         partner: {
             name: "Mi Amor",
-            description: "Mi persona favorita en el mundo entero. Mi todo.",
+            description: "Mi persona favorita en el mundo entero.",
             image: "images/characters/uwu.jpeg",  // ← FOTO DE TU PAREJA
             traits: [
-                "Hermoso/a 💜",
-                "Cariñoso/a 💕",
+                "Hermosa 💜",
+                "Cariñosa 💕",
                 "Increíble ✨",
                 "Inteligente 🧠",
-                "Divertido/a 😄",
-                "Perfecto/a 🌟"
+                "Divertida 😄",
+                "Perfecta 🌟"
             ],
-            clickMessage: "¡Eres absolutamente perfecto/a para mí! 💜",
+            clickMessage: "¡Eres absolutamente perfecta para mí! 💜",
             longDescription: "Eres la persona más maravillosa que he conocido. Tu sonrisa ilumina mis días, tu risa es mi melodía favorita, y tu amor es mi mayor tesoro."
         },
         you: {
             name: "Yo",
-            description: "El/la más afortunado/a del mundo por tenerte",
+            description: "El más afortunado del mundo por tenerte",
             image: "images/characters/you.jpeg",  // ← TU FOTO
             traits: [
-                "Enamorado/a 💘",
+                "Enamorado 💘",
                 "Feliz 😊",
-                "Agradecido/a 🙏",
-                "Dedicado/a 💪",
-                "Romántico/a 🌹",
+                "Agradecido 🙏",
+                "Dedicado 💪",
+                "Romántico 🌹",
                 "Leal 💯"
             ],
             clickMessage: "¡Te amo con todo mi corazón! 💖",
-            longDescription: "Cada día me siento más afortunado/a de tenerte en mi vida. Prometo amarte, cuidarte y hacerte feliz por siempre."
+            longDescription: "Cada día me siento más afortunado de tenerte en mi vida. Deseo amarte, cuidarte y hacerte feliz."
         }
     },
 
@@ -175,13 +164,13 @@ const CONFIG = {
 
     loveMeter: {
         percentage: "∞",
-        text: "Nuestro amor es infinito 💜",
-        description: "El amor que siento por ti no puede medirse en porcentajes. Es infinito, incondicional y eterno.",
+        text: "Nuestro amor es un tesoro 💜",
+        description: "El amor que siento por ti no puede medirse en porcentajes. Es incondicional y duradero.",
         milestones: [
             { value: 25, message: "Empezando a enamorarse 💕" },
-            { value: 50, message: "Muy enamorado/a 💖" },
-            { value: 75, message: "Completamente enamorado/a 💜" },
-            { value: 100, message: "Amor infinito y eterno ∞" }
+            { value: 50, message: "Muy enamorado 💖" },
+            { value: 75, message: "Completamente enamorado 💜" },
+            { value: 100, message: "Amor eterno ∞" }
         ]
     },
 
@@ -238,8 +227,8 @@ const CONFIG = {
     // ====================================
 
     additionalMessages: {
-        footer: "Hecho con 💜 para el amor de mi vida",
-        copyright: "© 2025 - Nuestro Amor Eterno",
+        footer: "Hecho con 💜 para mi niña",
+        copyright: "© 2026 - Nuestro Amor",
         clickLoveButton: "Haz clic para revelar una nota especial 💌",
         sendKiss: "Enviar Beso 💋",
         revealNote: "Revelar Nota Especial 💕",

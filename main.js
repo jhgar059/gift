@@ -12,7 +12,7 @@ const LoveWebsite = () => {
     {
       id: 1,
       title: "Nuestro Primer Beso 💋",
-      message: "Ese momento mágico donde todo comenzó. El primer beso que marcó el inicio de nuestra hermosa historia. Cada recuerdo de ese instante sigue haciéndome sonreír.",
+      message: "Ese momento donde todo comenzó. El primer beso que marcó el inicio de una linda historia. Cada recuerdo de ese instante sigue haciéndome sonreír.",
       image: "/images/memories/a.jpeg"  // ← Ruta absoluta con "/"
     },
     {
@@ -24,25 +24,25 @@ const LoveWebsite = () => {
     {
       id: 3,
       title: "Nuestro Primer Viaje ✈️",
-      message: "Aventuras juntos, descubriendo nuevos lugares y creando recuerdos inolvidables. Cada viaje a tu lado es una nueva historia de amor.",
+      message: "Aventuras juntos, descubriendo nuevos lugares y creando recuerdos inolvidables. Cada viaje es una oportunidad de crear nuevas historias.",
       image: "/images/memories/c.jpeg"
     },
     {
       id: 4,
-      title: "Nuestro Aniversario 🎊",
-      message: "Celebrando cada año que pasa a tu lado. Cada aniversario es un recordatorio de lo afortunados que somos de habernos encontrado.",
+      title: "Nuestras llamdas 🎊",
+      message: "Esas largas conversaciones que nunca terminan. Hablando de todo y de nada, sintiéndonos más cerca a pesar de la distancia.",
       image: "/images/memories/d.jpeg"
     },
     {
       id: 5,
       title: "Nuestros Momentos Especiales ⭐",
-      message: "Esos pequeños momentos que hacen la diferencia. Desde cafés por la mañana hasta películas en la noche, cada instante contigo es especial.",
+      message: "Esos pequeños momentos que hacen la diferencia. Desde mensajes por la mañana hasta películas en la noche, cada instante contigo es especial.",
       image: "/images/memories/z.jpeg"
     },
     {
       id: 6,
       title: "Nuestro Futuro Juntos 💫",
-      message: "Todo lo que está por venir. Sueños, metas y una vida entera para compartir. El mejor está por llegar, y lo viviremos juntos.",
+      message: "Todo lo que está por venir. Sueños, metas y cada momento para compartir. El mejor está por llegar, y lo viviremos juntos.",
       image: "/images/memories/r.jpeg"
     }
   ];
