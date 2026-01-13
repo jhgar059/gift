@@ -119,7 +119,7 @@ const CONFIG = {
             description: "Todo lo que está por venir. Sueños, metas y cada momento para compartir. El mejor está por llegar, y lo viviremos juntos.",
             specialMessage: "Un mañana a tu lado 💝",
             date: "2 de Junio de 2026 - ♾️",
-            image: "images/memories/p.jpeg",  // ← CAMBIA ESTA RUTA
+            image: "images/memories/j.jpeg",  // ← CAMBIA ESTA RUTA
         },
     ],
 
@@ -227,7 +227,7 @@ const CONFIG = {
     // ====================================
 
     additionalMessages: {
-        footer: "Hecho con 💜 para mi niña linda",
+        footer: "Hecho con 💜 para mi niña chiquita",
         copyright: "© 2026 - Nuestro Amor",
         clickLoveButton: "Haz clic para revelar una nota especial 💌",
         sendKiss: "Enviar Beso 💋",
