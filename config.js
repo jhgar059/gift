@@ -227,7 +227,7 @@ const CONFIG = {
     // ====================================
 
     additionalMessages: {
-        footer: "Hecho con 💜 para mi niña linda",
+        footer: "Hecho con 💜 para mi niña",
         copyright: "© 2026 - Nuestro Amor",
         clickLoveButton: "Haz clic para revelar una nota especial 💌",
         sendKiss: "Enviar Beso 💋",

@@ -51,7 +51,7 @@ const LoveWebsite = () => {
       title: "Nuestro Futuro Juntos 💫",
       message: "Todo lo que está por venir. Sueños, metas y cada momento para compartir. El mejor está por llegar, y lo viviremos juntos.",
       image: "images/memories/p.jpeg",  // ← CAMBIA ESTA RUTA
-    },
+      }
   ];
 
   const toggleCard = (id) => {

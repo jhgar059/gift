@@ -174,7 +174,7 @@ function createFloatingKiss() {
 function setupMemories() {
     const grid = document.querySelector('.memories-grid');
     grid.innerHTML = '';
-    grid.style.cssText = 'display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 350px)); gap: 25px; margin-top: 30px; justify-content: center;';
+    grid.style.cssText = 'display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 30px;';
 
     CONFIG.memories.forEach((memory, index) => {
         const card = createFlipCard(memory, index);
@@ -187,9 +187,7 @@ function createFlipCard(memory, index) {
     cardContainer.className = 'flip-card-container';
     cardContainer.style.cssText = `
         perspective: 1000px;
-        height: 420px;
-        max-width: 350px;
-        margin: 0 auto;
+        height: 450px;
         cursor: pointer;
     `;
 
