@@ -50,7 +50,7 @@ const LoveWebsite = () => {
       id: 7,
       title: "Nuestro Futuro Juntos 💫",
       message: "Todo lo que está por venir. Sueños, metas y cada momento para compartir. El mejor está por llegar, y lo viviremos juntos.",
-      image: "images/memories/p.jpeg",  // ← CAMBIA ESTA RUTA
+      image: "images/memories/xxxx.jpeg",  // ← CAMBIA ESTA RUTA
     },
   ];
 
