@@ -35,7 +35,7 @@ const LoveWebsite = () => {
     },
     {
       id: 5,
-      title: "Nuestros Momentos Especiales ⭐",
+      title: "Nuestros Momentos Especiales. ⭐",
       message: "Esos pequeños momentos que hacen la diferencia. Desde mensajes por la mañana hasta películas en la noche, cada instante contigo es especial.",
       image: "/images/memories/z.jpeg"
     },
